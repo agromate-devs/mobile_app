@@ -109,7 +109,7 @@
     colors: {
       primary: '#00ff96',
     },
-    darkMode: true,
+    darkMode: false,
 
 
     // App store

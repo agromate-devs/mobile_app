@@ -1,5 +1,7 @@
 
 import HomePage from '../pages/home.svelte';
+import HomePage2 from '../pages/home2.svelte';
+import HomePage3 from '../pages/home3.svelte';
 import AboutPage from '../pages/about.svelte';
 import FormPage from '../pages/form.svelte';
 
@@ -12,6 +14,14 @@ var routes = [
   {
     path: '/',
     component: HomePage,
+  },
+  {
+    path: '/home2/',
+    component: HomePage2,
+  },
+  {
+    path: '/home3/',
+    component: HomePage3,
   },
   {
     path: '/about/',
