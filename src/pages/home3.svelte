@@ -9,7 +9,7 @@
           <h4>Monitora i parametri del tuo orto comodamente dal tuo smartphone</h4>
         </div>
       </div>
-      <Button fill>Avanti</Button>
+      <Button fill href="/login/">Avanti</Button>
     </Block>
 </Page>
 <script>
