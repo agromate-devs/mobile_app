@@ -2,6 +2,8 @@
 import HomePage from '../pages/home.svelte';
 import HomePage2 from '../pages/home2.svelte';
 import HomePage3 from '../pages/home3.svelte';
+import UpdateConfirm from '../pages/update-confirm.svelte';
+import UpdateInCorso from '../pages/update-incorso.svelte';
 import AboutPage from '../pages/about.svelte';
 import FormPage from '../pages/form.svelte';
 
@@ -22,6 +24,14 @@ var routes = [
   {
     path: '/home3/',
     component: HomePage3,
+  },
+  {
+    path: '/updateconfirm/',
+    component: UpdateConfirm,
+  },
+  {
+    path: '/updateincorso/',
+    component: UpdateInCorso,
   },
   {
     path: '/about/',
