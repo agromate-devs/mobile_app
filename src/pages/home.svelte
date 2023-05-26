@@ -13,11 +13,22 @@
     </Block>
 </Page>
 <script>
+      export let f7router;
+    export let f7route;
+
   import {
     Page,
     Block,
     Button
   } from 'framework7-svelte';
+  import { onMount } from 'svelte';
+  import { getCurrentUser } from '../lib/firebase_auth.js';
+
+  onMount(async () => {
+    if((await getCurrentUser()).email != null){ // User is already logged in
+      f7router.navigate("/main/");  
+    }
+  })
 </script>
 
 <style>
