@@ -34,7 +34,7 @@
   }
   
   .animation {
-    animation: turnicamento 4s infinite linear;
+    animation: turnicamento 4s infinite;
   }
 
   @keyframes turnicamento {

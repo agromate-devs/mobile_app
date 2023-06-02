@@ -4,12 +4,7 @@ import HomePage2 from '../pages/home2.svelte';
 import HomePage3 from '../pages/home3.svelte';
 import UpdateConfirm from '../pages/update-confirm.svelte';
 import UpdateIncorso from '../pages/update-incorso.svelte';
-import AboutPage from '../pages/about.svelte';
-import FormPage from '../pages/form.svelte';
 
-
-import DynamicRoutePage from '../pages/dynamic-route.svelte';
-import RequestAndLoad from '../pages/request-and-load.svelte';
 import NotFoundPage from '../pages/404.svelte';
 import LoginPage from '../pages/login.svelte';
 import RegistratiPage from '../pages/registrati.svelte';
@@ -39,14 +34,6 @@ var routes = [
   {
     path: '/updateconfirm/',
     component: UpdateConfirm,
-  },
-  {
-    path: '/updateconfirm/',
-    component: UpdateConfirm,
-  },
-  {
-    path: '/updateincorso/',
-    component: UpdateInCorso,
   },
   {
     path: '/login/',
