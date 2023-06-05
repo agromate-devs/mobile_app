@@ -4,6 +4,7 @@ import HomePage2 from '../pages/home2.svelte';
 import HomePage3 from '../pages/home3.svelte';
 import UpdateConfirm from '../pages/update-confirm.svelte';
 import UpdateIncorso from '../pages/update-incorso.svelte';
+import Profile from '../pages/profile.svelte';
 
 import NotFoundPage from '../pages/404.svelte';
 import LoginPage from '../pages/login.svelte';
@@ -32,8 +33,8 @@ var routes = [
     component: UpdateIncorso,
   },
   {
-    path: '/updateconfirm/',
-    component: UpdateConfirm,
+    path: '/profile/',
+    component: Profile,
   },
   {
     path: '/login/',
