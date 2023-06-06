@@ -1,4 +1,5 @@
 <Page name="home">
+    <!-- navbar -->
     <div class="rectangle">
         <div class="circle1"></div>
         <div class="circle2"></div>
@@ -7,12 +8,20 @@
             <img src="/freccio.png" alt="freccio" width="75%">
           </a>
         </div>
-        <div class="center">
-            <img src="/foto_profile.png" alt="foto_profile" width="120" height="120">
-            <div style="color:#ffffff;">
-                <h1>Ciro Esposito</h1>
-                <h4 class="subtitle"><img src="/segnaposto.png" alt="segnaposto" width="15" height="15">  200 piante piantate</h4>
+        <div class="left">
+          <h1>Cacatus</h1>
+        </div>
+
+        <!-- searchbar cambiare colore-->
+        <div class="search_bar">
+          <form class="searchbar">
+              <div class="searchbar-input-wrap">
+                <input type="search" placeholder="Search"/>
+                <i class="searchbar-icon"></i>
+                <span class="input-clear-button"></span>
+              <span class="searchbar-disable-button">Cancel</span>
             </div>
+          </form>
         </div>
     </div>
     <Block>
@@ -82,41 +91,38 @@
 </script>
 
 <style>
-  .center {
+  .left {
     position: relative;
-    top: -520px;
-    text-align: center;
+    top: -280px;
+    text-align: left;
+    padding-left: 5%;
+    color:#ffffff;
   }
 
   .rectangle {
     width: 100%;
-    height: 280px;
+    height: 200px;
     background-color: rgba(97, 210, 196, 1);
   }
 
   .circle1 {
     position: relative;
-    left: 110px;
+    left: 190px;
     top: -60px;
-    height: 320px;
-    width: 320px;
+    height: 220px;
+    width: 220px;
     border-radius: 50%;
     background-color: rgba(255, 255, 255, 0.15);
   }
 
   .circle2 {
     position: relative;
-    left: 280px;
-    top: -180px;
-    height: 200px;
-    width: 200px;
+    left: 310px;
+    top: -110px;
+    height: 120px;
+    width: 120px;
     border-radius: 50%;
     background-color: rgba(255, 255, 255, 0.15);
-  }
-
-  .subtitle{
-    position: relative;
-    top: -18px;
   }
 
   .infobox {
@@ -125,9 +131,16 @@
 
   .freccia {
     position: relative;
-    top: -460px;
+    top: -300px;
     width: 10%;
     height: 20%;
     padding-left: 5%;
+  }
+
+  .search_bar {
+    position: relative;
+    top: -290px;
+    padding-left: 5%;
+    padding-right: 5%;
   }
 </style>

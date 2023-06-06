@@ -13,7 +13,7 @@
     </Block>
 </Page>
 <script>
-      export let f7router;
+    export let f7router;
     export let f7route;
 
   import {

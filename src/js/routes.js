@@ -5,6 +5,8 @@ import HomePage3 from '../pages/home3.svelte';
 import UpdateConfirm from '../pages/update-confirm.svelte';
 import UpdateIncorso from '../pages/update-incorso.svelte';
 import Profile from '../pages/profile.svelte';
+import ListPlant from '../pages/list_plant.svelte';
+
 
 import NotFoundPage from '../pages/404.svelte';
 import LoginPage from '../pages/login.svelte';
@@ -35,6 +37,10 @@ var routes = [
   {
     path: '/profile/',
     component: Profile,
+  },
+  {
+    path: '/list_plant/',
+    component: ListPlant,
   },
   {
     path: '/login/',
