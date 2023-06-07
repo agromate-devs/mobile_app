@@ -9,7 +9,7 @@
           <h4>Coltiva tutte le piante presenti nel nostro sistema o aggiungine di nuove</h4>
         </div>
       </div>
-      <Button fill href="/profile/">Avanti</Button>
+      <Button fill href="/homepage/">Avanti</Button>
     </Block>
 </Page>
 <script>

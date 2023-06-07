@@ -1,11 +1,12 @@
 
-import HomePage from '../pages/home.svelte';
-import HomePage2 from '../pages/home2.svelte';
-import HomePage3 from '../pages/home3.svelte';
+import Home from '../pages/home.svelte';
+import Home2 from '../pages/home2.svelte';
+import Home3 from '../pages/home3.svelte';
 import UpdateConfirm from '../pages/update-confirm.svelte';
 import UpdateIncorso from '../pages/update-incorso.svelte';
 import Profile from '../pages/profile.svelte';
 import ListPlant from '../pages/list_plant.svelte';
+import HomePage from '../pages/homepage.svelte';
 
 
 import NotFoundPage from '../pages/404.svelte';
@@ -16,15 +17,15 @@ import MainPage from '../pages/main.svelte';
 var routes = [
   {
     path: '/',
-    component: HomePage,
+    component: Home,
   },
   {
     path: '/home2/',
-    component: HomePage2,
+    component: Home2,
   },
   {
     path: '/home3/',
-    component: HomePage3,
+    component: Home3,
   },
   {
     path: '/updateconfirm/',
@@ -41,6 +42,10 @@ var routes = [
   {
     path: '/list_plant/',
     component: ListPlant,
+  },
+  {
+    path: '/homepage/',
+    component: HomePage,
   },
   {
     path: '/login/',
