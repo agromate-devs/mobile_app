@@ -91,7 +91,7 @@
   .rectangle {
     width: 100%;
     height: 280px;
-    background-color: rgba(97, 210, 196, 1);
+    background-image: linear-gradient(to right,rgba(97, 210, 196, 1), rgba(41, 216, 144, 1));
   }
 
   .circle1 {

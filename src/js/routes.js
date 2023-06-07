@@ -7,6 +7,8 @@ import UpdateIncorso from '../pages/update-incorso.svelte';
 import Profile from '../pages/profile.svelte';
 import ListPlant from '../pages/list_plant.svelte';
 import HomePage from '../pages/homepage.svelte';
+import IdentifyPlant from '../pages/identify_plant.svelte';
+import Species from '../pages/species.svelte';
 
 
 import NotFoundPage from '../pages/404.svelte';
@@ -46,6 +48,14 @@ var routes = [
   {
     path: '/homepage/',
     component: HomePage,
+  },
+  {
+    path: '/identify_plant/',
+    component: IdentifyPlant,
+  },
+  {
+    path: '/species/',
+    component: Species,
   },
   {
     path: '/login/',

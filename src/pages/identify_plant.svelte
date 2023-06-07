@@ -4,15 +4,14 @@
         <img src="/home-qr.png" alt="home-qr" width="300" height="300">
       </div>
       <div class="BIG-text">
-        <h1>Aggiungi le tue piante</h1>
+        <h1>Accoppia un nuovo sensore</h1>
+        <Button fill href="/homepage/">Avvia la ricerca</Button>
         <div style="color:gray">
-          <h4>Coltiva tutte le piante presenti nel nostro sistema o aggiungine di nuove</h4>
+          <h4>La ricerca richieda la geolocalizzazione attiva, una rete wifi 2.4/5ghz e può richiedere alcuni minuti</h4>
         </div>
       </div>
-      <Button fill href="/species/">Avanti</Button>
     </Block>
 </Page>
-
 <script>
     export let f7router;
     export let f7route;

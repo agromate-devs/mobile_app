@@ -17,7 +17,7 @@
         <div class="search_bar">
           <form class="searchbar">
               <div class="searchbar-input-wrap">
-                <input type="search" placeholder="Search For Plants "/>
+                <input type="search" placeholder="Search For Plants"/>
                 <i class="searchbar-icon"></i>
                 <span class="input-clear-button"></span>
               <span class="searchbar-disable-button">Cancel</span>
