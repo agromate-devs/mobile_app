@@ -18,14 +18,21 @@
     import { FirebaseAuthentication } from "@capacitor-firebase/authentication";
 
     let email, password;
-    
+
     async function login() {
-        const result = await FirebaseAuthentication.signInWithEmailAndPassword({
-            email: email,
-            password: password,
-        });
-        if (result.user != null) {
-            f7router.navigate("/homepage/");
+        try {
+            const result =
+                await FirebaseAuthentication.signInWithEmailAndPassword({
+                    email: email,
+                    password: password,
+                });
+            if (result.user != null) {
+                f7router.navigate("/homepage/");
+            }
+        } catch (error) {
+            f7.dialog.alert(
+                "Account non esistente, controlla la password o la email."
+            );
         }
     }
 </script>
@@ -80,7 +87,7 @@
     <Block>
         <Button on:click={login} fill>Accedi</Button>
         <br />
-        
+
         {#if import.meta.env.MODE == "development"}
             <Button href="/homepage/" fill>Accesso DEV</Button>
             <br />
