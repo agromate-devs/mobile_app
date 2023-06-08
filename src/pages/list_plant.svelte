@@ -62,7 +62,7 @@
   .rectangle {
     width: 100%;
     height: 200px;
-    background-color: rgba(97, 210, 196, 1);
+    background-image: linear-gradient(to right,rgba(97, 210, 196, 1), rgba(41, 216, 144, 1));
   }
 
   .circle1 {
@@ -82,7 +82,7 @@
     height: 120px;
     width: 120px;
     border-radius: 50%;
-    background-color: rgba(255, 255, 255, 0.15);
+    background-color: rgba(255, 255, 255, 0.15),;
   }
 
   .freccia {
