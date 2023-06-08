@@ -25,9 +25,8 @@
             password: password,
         });
         if (result.user != null) {
-            f7router.navigate("/main/");
+            f7router.navigate("/homepage/");
         }
-        // Save user to store(maybe?)
     }
 </script>
 
@@ -81,6 +80,12 @@
     <Block>
         <Button on:click={login} fill>Accedi</Button>
         <br />
+        
+        {#if import.meta.env.MODE == "development"}
+            <Button href="/homepage/" fill>Accesso DEV</Button>
+            <br />
+        {/if}
+
         <div class="text-align-center">
             Non hai un account?
             <span class="green_span">

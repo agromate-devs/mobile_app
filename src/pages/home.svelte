@@ -7,8 +7,7 @@
   import { getCurrentUser, is_user_logged } from '../lib/firebase_auth.js';
 
   onMount(async () => {
-    console.log(await getCurrentUser())
-    if(is_user_logged() != null){ // User is already logged in
+    if(await getCurrentUser() != null){ // User is already logged in
       f7router.navigate("/homepage/");  
     }
   })
