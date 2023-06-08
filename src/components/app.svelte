@@ -1,6 +1,25 @@
 <App { ...f7params }>
   <!-- Your main view, should have "view-main" class -->
-  <View main class="safe-areas" url="/" />
+  <View main class="safe-areas" url="/">
+    {#if $current_page != "home"}
+      <Toolbar tabbar icons position="bottom">
+        <Link
+          tabLink="#tab-1"
+          tabLinkActive
+          text="Home"
+          iconIos="f7:home"
+          iconMd="material:home"
+        />
+        <Link tabLink="#tab-2" text="Lista dei desideri" iconIos="f7:star" iconMd="f7:star" />
+        <Link
+          tabLink="#tab-3"
+          text="Profilo"
+          iconIos="f7:person"
+          iconMd="material:person"
+        />
+    </Toolbar>
+  {/if}
+  </View>
 </App>
 <script>
   import { onMount } from 'svelte';
@@ -9,33 +28,17 @@
     f7,
     f7ready,
     App,
-    Panel,
-    Views,
     View,
-    Popup,
-    Page,
-    Navbar,
     Toolbar,
-    NavRight,
     Link,
-    Block,
-    BlockTitle,
-    LoginScreen,
-    LoginScreenTitle,
-    List,
-    ListItem,
-    ListInput,
-    ListButton,
-    BlockFooter
   } from 'framework7-svelte';
   import { initializeApp } from "firebase/app";
   import { firebaseConfig } from '../lib/firebase_config.js';
   import capacitorApp from '../js/capacitor-app';
   import routes from '../js/routes';
-  import store from '../js/store';
+  import { current_page } from '../js/store';
   
   const app = initializeApp(firebaseConfig);
-
 
   const device = getDevice();
   // Framework7 Parameters
@@ -47,9 +50,6 @@
     },
     darkMode: false,
 
-
-    // App store
-    store: store,
     // App routes
     routes: routes,
 
