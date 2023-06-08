@@ -12,7 +12,6 @@ import HomePage from '../pages/homepage.svelte';
 import NotFoundPage from '../pages/404.svelte';
 import LoginPage from '../pages/login.svelte';
 import RegistratiPage from '../pages/registrati.svelte';
-import MainPage from '../pages/main.svelte';
 
 var routes = [
   {
@@ -54,10 +53,6 @@ var routes = [
   {
     path: '/registrati/',
     component: RegistratiPage
-  },
-  {
-    path: '/main/',
-    component: MainPage
   },
   {
     path: '(.*)',

@@ -76,7 +76,7 @@
 
   onMount(async () => {
     if((await getCurrentUser()).email != null){ // User is already logged in
-      f7router.navigate("/main/");  
+      f7router.navigate("/homepage/");  
     }
   })
 </script>

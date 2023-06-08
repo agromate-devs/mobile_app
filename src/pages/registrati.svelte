@@ -23,7 +23,7 @@
             const result =
                 await FirebaseAuthentication.createUserWithEmailAndPassword({
                     email: email,
-                    password: password,
+                    password: password
                 });
             if(result.user != null){
                 f7.dialog.alert("Registrazione completata!");
