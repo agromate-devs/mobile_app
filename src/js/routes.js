@@ -9,6 +9,8 @@ import ListPlant from '../pages/list_plant.svelte';
 import HomePage from '../pages/homepage.svelte';
 import IdentifyPlant from '../pages/identify_plant.svelte';
 import Species from '../pages/species.svelte';
+import WifiLoader from '../pages/wifi_loader.svelte';
+import ConnectionEsp from '../pages/connection_esp.svelte';
 
 
 import NotFoundPage from '../pages/404.svelte';
@@ -18,59 +20,67 @@ import MainPage from '../pages/main.svelte';
 
 var routes = [
   {
-    path: '/',
+    path: "/",
     component: Home,
   },
   {
-    path: '/home2/',
+    path: "/home2/",
     component: Home2,
   },
   {
-    path: '/home3/',
+    path: "/home3/",
     component: Home3,
   },
   {
-    path: '/updateconfirm/',
+    path: "/updateconfirm/",
     component: UpdateConfirm,
   },
   {
-    path: '/updateincorso/',
+    path: "/updateincorso/",
     component: UpdateIncorso,
   },
   {
-    path: '/profile/',
+    path: "/profile/",
     component: Profile,
   },
   {
-    path: '/list_plant/',
+    path: "/list_plant/",
     component: ListPlant,
   },
   {
-    path: '/homepage/',
+    path: "/homepage/",
     component: HomePage,
   },
   {
-    path: '/identify_plant/',
+    path: "/identify_plant/",
     component: IdentifyPlant,
   },
   {
-    path: '/species/',
+    path: "/species/",
     component: Species,
   },
   {
-    path: '/login/',
+    path: "/login/",
     component: LoginPage,
   },
   {
-    path: '/registrati/',
-    component: RegistratiPage
+    path: "/registrati/",
+    component: RegistratiPage,
   },
   {
-    path: '/main/',
-    component: MainPage
+    path: "/wifi_loader/",
+    component: WifiLoader,
   },
   {
-    path: '(.*)',
+    path: "/connection_esp/",
+    component: ConnectionEsp,
+  },
+  {
+    path: "/main/",
+    component: MainPage,
+  },
+  {
+    path: "(.*)",
     component: NotFoundPage,
   },
 ];
