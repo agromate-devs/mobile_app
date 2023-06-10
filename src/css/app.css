@@ -1,1 +1,5 @@
 /* Your app custom styles here */
+
+.searchbar-backdrop-in {    /* Override default F7 searchbar backdrop (it's ugly for us) */
+    opacity: 0 !important;
+}

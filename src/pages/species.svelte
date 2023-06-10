@@ -1,131 +1,108 @@
-<Page name="home">
-    <!-- navbar -->
-    <div class="rectangle">
-        <div class="circle1"></div>
-        <div class="circle2"></div>
-        <div class="freccia">
-          <a class="link" href="/">
-            <img src="/freccio.png" alt="freccio" width="75%">
-          </a>
-        </div>
-        <div class="left">
-          <h1>Esplora</h1>
-        </div>
-
-        <!-- searchbar cambiare colore-->
-        <div class="search_bar">
-          <form class="searchbar">
-              <div class="searchbar-input-wrap">
-                <input type="search" placeholder="Cerca una specie"/>
-                <i class="searchbar-icon"></i>
-                <span class="input-clear-button"></span>
-              <span class="searchbar-disable-button">Cancel</span>
-            </div>
-          </form>
-        </div>
-    </div>
-    <Block>
-      <div class="list">
-        <div class="list-group">
-          <ul>
-            <li class="alphabet_list">A</li>
-            <li>
-              <div class="item-content">
-                <div class="item-inner">
-                  <div class="item-title">Aaron </div>
-                </div>
-              </div>
-            </li>
-            <li>
-              <div class="item-content">
-                <div class="item-inner">
-                  <div class="item-title">Abbie</div>
-                </div>
-              </div>
-            </li>
-            <li>
-              <div class="item-content">
-                <div class="item-inner">
-                  <div class="item-title">Adam</div>
-                </div>
-              </div>
-            </li>
-          </ul>
-        </div>
-        <div class="list-group">
-          <ul>
-            <li class="alphabet_list">B</li>
-            <li>
-              <div class="item-content">
-                <div class="item-inner">
-                  <div class="item-title">Bailey</div>
-                </div>
-              </div>
-            </li>
-            <li>
-              <div class="item-content">
-                <div class="item-inner">
-                  <div class="item-title">Barclay</div>
-                </div>
-              </div>
-            </li>
-            <li>
-              <div class="item-content">
-                <div class="item-inner">
-                  <div class="item-title">Bartolo</div>
-                </div>
-              </div>
-            </li>
-          </ul>
-        </div>
-        <div class="list-group">
-          <ul>
-            <li class="alphabet_list">C</li>
-            <li>
-              <div class="item-content">
-                <div class="item-inner">
-                  <div class="item-title">Caiden</div>
-                </div>
-              </div>
-            </li>
-            <li>
-              <div class="item-content">
-                <div class="item-inner">
-                  <div class="item-title">Calvin</div>
-                </div>
-              </div>
-            </li>
-            <li>
-              <div class="item-content">
-                <div class="item-inner">
-                  <div class="item-title">Candy</div>
-                </div>
-              </div>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </Block>
-</Page>
-
-<script>
-    export let f7router;
-
+<script lang="ts">
   import {
     Page,
-    Block,
-    Navbar,
-    Button
-  } from 'framework7-svelte';
-  import { onMount } from 'svelte';
-  import { getCurrentUser } from '../lib/firebase_auth.js';
+    List,
+    ListGroup,
+    ListItem,
+    ListIndex,
+    Searchbar,
+  } from "framework7-svelte";
+  import { onMount } from "svelte";
+  import { DBContext } from "../db/DBContext";
+  import { f7 } from "framework7-svelte";
+
+  const PLANTS_DB = new DBContext();
+  let families = [];
+  let letters = [];
+
+  async function import_records() {
+    const plants = (await (await fetch("usda_light.sql")).text()).split("\n");
+    for (let index = 0; index < plants.length; index++) {
+      await PLANTS_DB.query(plants[index]);
+    }
+  }
+
+  async function import_schema() {
+    const schema = await (await fetch("usda_tables.sql")).text();
+    await PLANTS_DB.query(schema);
+  }
 
   onMount(async () => {
-    if((await getCurrentUser()).email != null){ // User is already logged in
-      f7router.navigate("/main/");  
+    f7.dialog.preloader(
+      "Caricamento Database in corso... L'operazione potrebbe richiedere qualche minuto"
+    );
+    await PLANTS_DB.init_capacitor_sqlite_plugin(); // Init web store and jeep sqlite
+    if (!(await PLANTS_DB.is_database_saved())) {
+      await PLANTS_DB.init_db(); // Create database on TypeORM
+      await import_schema(); // Import schema
+      await import_records(); // Import plants
+      await PLANTS_DB.save_database(); // Save DB
+    } else {
+      await PLANTS_DB.init_db(); // Create database on TypeORM
     }
-  })
+    families = await PLANTS_DB.get_all_plants(); // Get all families
+    let unique_letters = new Set( // Get all unique letters of plants for the list
+      families.map((family) => family.family.charAt(0))
+    );
+    letters = Array.from(unique_letters); // Svelte can't iterate a Set
+    f7.dialog.close();
+  });
 </script>
+
+<Page name="home">
+  <!-- navbar -->
+  <div class="rectangle">
+    <div class="circle1" />
+    <div class="circle2" />
+    <div class="freccia">
+      <a class="link" href="/">
+        <img src="/freccio.png" alt="freccio" width="75%" />
+      </a>
+    </div>
+    <div class="left">
+      <h1>Esplora</h1>
+    </div>
+
+    <!-- searchbar cambiare colore-->
+    <div class="search_bar">
+      <Searchbar
+        searchContainer=".search-list"
+        searchIn=".item-title"
+        placeholder="Cerca una specie"
+      />
+    </div>
+  </div>
+  <br />
+  <List strongIos outlineIos dividersIos class="searchbar-not-found">
+    <ListItem title="Nothing found" />
+  </List>
+
+  <ListIndex
+    indexes="auto"
+    listEl=".list.contacts-list"
+    scrollList={true}
+    label={true}
+  />
+  <List contactsList class="search-list searchbar-found">
+    <ListGroup>
+      <ListItem title="#" groupTitle />
+      <ListItem title="Non categorizzate" />
+    </ListGroup>
+    {#each letters as letter}
+      <!-- Remove empty block -->
+      {#if letter != ""}
+        <ListGroup>
+          <ListItem title={letter} groupTitle />
+          {#each families as family}
+            {#if family.family.charAt(0) == letter}
+              <ListItem title={family.family} />
+            {/if}
+          {/each}
+        </ListGroup>
+      {/if}
+    {/each}
+  </List>
+</Page>
 
 <style>
   .left {
@@ -133,13 +110,17 @@
     top: -280px;
     text-align: left;
     padding-left: 5%;
-    color:#ffffff;
+    color: #ffffff;
   }
 
   .rectangle {
     width: 100%;
     height: 200px;
-    background-image: linear-gradient(to right,rgba(97, 210, 196, 1), rgba(41, 216, 144, 1));
+    background-image: linear-gradient(
+      to right,
+      rgba(97, 210, 196, 1),
+      rgba(41, 216, 144, 1)
+    );
   }
 
   .circle1 {
@@ -175,13 +156,5 @@
     top: -290px;
     padding-left: 5%;
     padding-right: 5%;
-  }
-
-  .alphabet_list {
-    color: #2DDA93;
-    padding-left: 2%;
-    font-size: 120%;
-    margin-bottom: -2%;
-    font-weight: 900;
   }
 </style>

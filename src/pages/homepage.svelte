@@ -1,73 +1,3 @@
-<Page name="home">       <!-- manca la parte sotto -->
-    <!-- navbar -->
-    <div class="rectangle_nav">
-        <div class="circle1"></div>
-        <div class="circle2"></div>
-        <div class="freccia">
-        </div>
-        <div class="left">
-          <h1>Hello Ciro</h1>
-          <h4 style="margin-top: -6%;">Scegli la pianta che preferisci</h4>
-        </div>
-        <div class="profile_image">
-          <img src="/foto-profile.png" alt="foto-profile" width="70px" height="70px">
-        </div>
-
-        <!-- searchbar cambiare colore-->
-        <div class="search_bar">
-          <form class="searchbar">
-              <div class="searchbar-input-wrap">
-                <input type="search" placeholder="Search For Plants"/>
-                <i class="searchbar-icon"></i>
-                <span class="input-clear-button"></span>
-              <span class="searchbar-disable-button">Cancel</span>
-            </div>
-          </form>
-        </div>
-    </div>
-    <Block>
-        <!-- button -->
-        <div class="button_poisition">
-          <div class="grid grid-cols-3">
-
-            <div class="rectangle">
-              <div class="center">
-                <img src="/home-fotocamera.png" alt="homa-fotocamera" class="image_change_color">
-                <h5 class="button_text">Esplora</h5>
-              </div>
-            </div>
-
-            <div class="rectangle">
-              <div class="center" style="padding-top: 10%;">
-                <img src="/home-foglia.png" alt="homa-fotocamera" class="image_change_color" style="width: 45%;">
-                <h5 class="button_text" style="margin-top: -12%;">Monitora</h5>
-              </div>
-            </div>
-
-            <div class="rectangle">
-              <div class="center">
-                <img src="/home-libro.png" alt="homa-fotocamera" class="image_change_color">
-                <h5 class="button_text">I tuoi dispositivi</h5>
-              </div>
-            </div>
-
-          </div>
-        </div>
-
-        <h1 style="margin-left: 4%; margin-bottom: -2%; margin-top: 8%;">Piante</h1>
-        <!-- card fare il side scroll-->
-        <div>
-          <!-- card-basilico -->
-          <div class="card">
-            <img src="/homepage-card-basilico.png" alt="homepage-card-basilico" height="100%" width="100%">
-            <div class="card_text">
-              <h1>Basilico</h1>
-            </div>
-          </div>
-        </div>
-    </Block>
-</Page>
-
 <script>
   import PiantaCard from "./PiantaCard.svelte";
 
@@ -75,14 +5,14 @@
 
   export let f7router;
 
-  import { Page, Block, Searchbar } from "framework7-svelte";
+  import { Page, Block, Searchbar, Link } from "framework7-svelte";
   import { onMount } from "svelte";
   import { getCurrentUser, is_user_logged } from "../lib/firebase_auth.js";
   import { current_page } from "../js/store";
 
   let user = "";
   onMount(async () => {
-    if (await getCurrentUser() != null){
+    if ((await getCurrentUser()) != null) {
       user = (await getCurrentUser()).displayName;
     }
   });
@@ -109,9 +39,9 @@
         height="70px"
       />
     </div>
-    <!-- searchbar cambiare colore-->
+    <!-- searchbar cambiare colore -->
     <div class="search_bar">
-      <Searchbar searchContainer=".search-list" searchIn=".item-title" />
+      <Searchbar />
     </div>
   </div>
   <Block>
@@ -124,6 +54,8 @@
           href="/list_plant/"
         />
 
+        <Link href="/species/">
+
         <div class="rectangle">
           <div class="center" style="padding-top: 10%;">
             <img
@@ -135,7 +67,7 @@
             <h5 class="button_text" style="margin-top: -12%;">Monitora</h5>
           </div>
         </div>
-
+      </Link>
         <ButtonHome text="I tuoi dispositivi" img="/home-libro.png" />
       </div>
     </div>

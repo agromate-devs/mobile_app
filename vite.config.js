@@ -1,7 +1,4 @@
-
 import path from 'path';
-
-
 
 const SRC_DIR = path.resolve(__dirname, './src');
 const PUBLIC_DIR = path.resolve(__dirname, './public');
@@ -17,6 +14,9 @@ export default async () => {
     base: '',
     publicDir: PUBLIC_DIR,
     build: {
+      commonjsOptions: {
+        include:[]
+      },
       outDir: BUILD_DIR,
       assetsInlineLimit: 0,
       emptyOutDir: true,
@@ -32,6 +32,8 @@ export default async () => {
     server: {
       host: true,
     },
-
+    optimizeDeps: {
+      exclude: ['jeep-sqlite']
+    }
   };
 }

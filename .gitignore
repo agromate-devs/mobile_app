@@ -50,3 +50,7 @@ resources/windows/splash
 
 # Production build
 www/
+
+# SQL WASM
+
+public/assets/sql-wasm.wasm
