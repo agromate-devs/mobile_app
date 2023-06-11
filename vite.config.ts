@@ -7,7 +7,9 @@ export default async () => {
   const { svelte } = await import('@sveltejs/vite-plugin-svelte');
   return  {
     plugins: [
-      svelte(),
+      svelte({
+        configFile: './svelte.config.ts'
+      }),
 
     ],
     root: SRC_DIR,
