@@ -65,7 +65,11 @@ export class DBContext {
     }
 
     async is_database_saved() {
-        return (await this.sqlite.isDatabase("plants")).result;
+        try {
+            return (await this.sqlite.isDatabase("plants")).result;
+        } catch (error) {   // fallback
+            return false;            
+        }
     }
 
     async save_database() {
@@ -74,5 +78,25 @@ export class DBContext {
 
     async get_all_plants() {
         return await this.datasource.getRepository(Usda).createQueryBuilder("usda").distinctOn(["usda.family"]).select("usda.family").addSelect("usda.id").groupBy("usda.family").getMany();
+    }
+
+    async get_plants_by_family(family: string) {
+        // TODO: Cleanup the query to retrive less data
+        return await this.datasource
+        .getRepository(Usda)
+        .createQueryBuilder("usda")
+        // .select("usda.id")
+        // .addSelect("usda.family")
+        // .addSelect("usda.Common_Name")
+        // .addSelect("usda.Scientific_Name_x")
+        // .addSelect("usda.Precipitation_Minimum")
+        // .addSelect("usda.Precipitation_Maximum")
+        // .addSelect("usda.pH_Minimum")
+        // .addSelect("usda.pH_Maximum")
+        // .addSelect("usda.Temperature_Minimum_F")
+        // .addSelect("usda.Growth_Rate")
+        .where("usda.family = :Family", { Family: family})
+        .groupBy("usda.Common_Name")
+        .getMany();
     }
 }
