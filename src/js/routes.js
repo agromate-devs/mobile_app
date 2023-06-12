@@ -16,6 +16,7 @@ import ConnectionEsp from '../pages/connection_esp.svelte';
 import NotFoundPage from '../pages/404.svelte';
 import LoginPage from '../pages/login.svelte';
 import RegistratiPage from '../pages/registrati.svelte';
+import PlantPage from '../pages/plant.svelte';
 
 var routes = [
   {
@@ -73,6 +74,10 @@ var routes = [
   {
     path: "/connection_esp/",
     component: ConnectionEsp,
+  },
+  {
+    path: "/plant/",
+    component: PlantPage
   },
   {
     path: "(.*)",

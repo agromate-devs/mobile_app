@@ -2,14 +2,14 @@
   export let f7router;
 
   import PiantaItem from "./PiantaItem.svelte";
-  import { Page, Block, List, ListItem } from "framework7-svelte";
+  import { Page, Block } from "framework7-svelte";
   import Navbar from "./Navbar.svelte";
-  import { selected_family } from "../js/store";
+  import { selected_family, selected_plant_scientific_name, selected_plant_name, selected_plant_photo } from "../js/store";
   import { onMount } from "svelte";
   import { DBContext } from "../db/DBContext";
   import { capitalize, page_panic } from "../lib/helper";
-  import viewport from "src/lib/viewport";
-  
+  import { get_plant_photo } from "../lib/wikipedia";
+
   const PLANTS_DB = new DBContext();
   let plants = [];
 
@@ -44,6 +44,13 @@
 
     plants = await PLANTS_DB.get_plants_by_family($selected_family);
   });
+
+  async function select_plant(name: string, sci_name: string) {
+    $selected_plant_name = name;
+    $selected_plant_photo = await get_plant_photo(name);
+    $selected_plant_scientific_name = sci_name
+    f7router.navigate("/plant/");
+  }
 </script>
 
 <Page name="home">
@@ -54,11 +61,12 @@
       <ListItem title="Nothing found" />
     </List> -->
 
-      <br />
+    <br />
     <!-- <List class="search-list searchbar-found"> -->
-      {#each plants as plant}
-        {#if plant.commonName != ""}
-          <!-- piantine -->
+    {#each plants as plant}
+      {#if plant.commonName != ""}
+        <!-- piantine -->
+        <div on:click={() => select_plant(plant.commonName, plant.scientificNameX)} on:keypress={() => {}}>
           <PiantaItem
             temp={plant.temperatureMinimumF == ""
               ? "?"
@@ -67,18 +75,22 @@
             days={growth_rate_to_about_days(plant.growthRate)}
             name={capitalize(plant.commonName)}
           />
-        {:else}
-          <!-- piantine -->
-          <PiantaItem
-            temp={plant.temperatureMinimumF == ""
-              ? "?"
-              : plant.temperatureMinimumF}
-            ph={ph_media(plant.pHMinimum, plant.pHMaximium)}
-            days={growth_rate_to_about_days(plant.growthRate)}
-            name={plant.scientificNameX}
-          />
-        {/if}
-      {/each}
+        </div>
+      {:else}
+      <div on:click={() => select_plant(plant.scientificNameX, plant.scientificNameX)} on:keypress={() => {}}>
+
+        <!-- piantine -->
+        <PiantaItem
+          temp={plant.temperatureMinimumF == ""
+            ? "?"
+            : plant.temperatureMinimumF}
+          ph={ph_media(plant.pHMinimum, plant.pHMaximium)}
+          days={growth_rate_to_about_days(plant.growthRate)}
+          name={plant.scientificNameX}
+        />
+        </div>
+      {/if}
+    {/each}
     <!-- </List> -->
   </Block>
 </Page>
