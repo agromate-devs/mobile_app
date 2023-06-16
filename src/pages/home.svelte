@@ -9,7 +9,7 @@
           <h4>Coltiva tutte le piante presenti nel nostro sistema o aggiungine di nuove</h4>
         </div>
       </div>
-      <Button fill href="/species/">Avanti</Button>
+      <Button fill href="/agrosmart_view/">Avanti</Button>
     </Block>
 </Page>
 

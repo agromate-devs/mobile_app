@@ -9,8 +9,7 @@ import ListPlant from '../pages/list_plant.svelte';
 import HomePage from '../pages/homepage.svelte';
 import IdentifyPlant from '../pages/identify_plant.svelte';
 import Species from '../pages/species.svelte';
-
-
+import AgrosmartView from '../pages/agrosmart_view.svelte';
 import NotFoundPage from '../pages/404.svelte';
 import LoginPage from '../pages/login.svelte';
 import RegistratiPage from '../pages/registrati.svelte';
@@ -56,6 +55,10 @@ var routes = [
   {
     path: '/species/',
     component: Species,
+  },
+  {
+    path: '/agrosmart_view/',
+    component: AgrosmartView,
   },
   {
     path: '/login/',
