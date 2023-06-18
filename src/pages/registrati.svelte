@@ -1,7 +1,7 @@
 <script>
     export let f7router;
     export let f7route;
-    
+
     import {
         Page,
         Navbar,
@@ -13,19 +13,23 @@
     } from "framework7-svelte";
     import { f7 } from "framework7-svelte";
     import { FirebaseAuthentication } from "@capacitor-firebase/authentication";
-    // import LoginWithGoogle from "../components/login_with_google.svelte";
-    // import { getAnalytics } from "firebase/analytics";
 
-    let email, password, password_confirm;
+    let email, user, password, password_confirm;
+
     async function registrati() {
         var re = /^(?=.*\d)(?=.*[!@#$%^&*])(?=.*[a-z])(?=.*[A-Z]).{8,}$/; // 8 caratteri(1 maiuscolo), un simbolo e un numero
         if (re.test(password) && password == password_confirm) {
+            f7.dialog.preloader("Registrazione in corso");
             const result =
                 await FirebaseAuthentication.createUserWithEmailAndPassword({
                     email: email,
                     password: password,
                 });
-            if(result.user != null){
+            if (result.user != null) {
+                await FirebaseAuthentication.updateProfile({
+                    displayName: user,
+                });
+                f7.dialog.close();
                 f7.dialog.alert("Registrazione completata!");
                 f7router.navigate("/login/");
             }
@@ -34,8 +38,6 @@
                 "La password non rispetta i requisiti di sicurezza, usare 8 caratteri, di cui uno maiuscolo, un simbolo e un numero"
             );
         }
-
-        // Save user to store(maybe?)
     }
 </script>
 
@@ -58,6 +60,18 @@
             required
             errorMessage="Inserisci una email valida"
             bind:value={email}
+        >
+            <!-- <i class="icon demo-list-icon" slot="media" /> -->
+        </ListInput>
+
+        <ListInput
+            label="Username"
+            floatingLabel
+            type="text"
+            placeholder="Username"
+            clearButton
+            required
+            bind:value={user}
         >
             <!-- <i class="icon demo-list-icon" slot="media" /> -->
         </ListInput>

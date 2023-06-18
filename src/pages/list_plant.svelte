@@ -1,146 +1,96 @@
-<Page name="home">
-    <!-- navbar -->
-    <div class="rectangle">
-        <div class="circle1"></div>
-        <div class="circle2"></div>
-        <div class="freccia">
-          <a class="link" href="/">
-            <img src="/freccio.png" alt="freccio" width="75%">
-          </a>
-        </div>
-        <div class="left">
-          <h1>Cacatus</h1>
-        </div>
+<script lang="ts">
+  export let f7router;
 
-        <!-- searchbar cambiare colore-->
-        <div class="search_bar">
-          <form class="searchbar">
-              <div class="searchbar-input-wrap">
-                <input type="search" placeholder="Search"/>
-                <i class="searchbar-icon"></i>
-                <span class="input-clear-button"></span>
-              <span class="searchbar-disable-button">Cancel</span>
-            </div>
-          </form>
-        </div>
-    </div>
-    <Block>
-        <!-- piantine -->
-        <div class="grid grid-cols-2">
-            <img src="/cacatus_rosso.png" alt="cacatus_rosso" width="140" height="140">
-            <div>
-                <h2>Basilico</h2>
-                <div class="grid grid-cols-2">
-                    <div>
-                        <h5 class="infobox" style="color:gray">Temp. media</h5>
-                        <h5 class="infobox">19</h5>
-                    </div>
-                    <div>
-                        <h5 class="infobox" style="color:gray">Umidità media</h5>
-                        <h5 class="infobox">60%</h5>
-                    </div>
-                </div>
-                <div>
-                    <h5 class="infobox" style="color:gray">Giorni impiegati per crescere</h5>
-                    <h5 class="infobox">25</h5>
-                </div>
-            </div>
-        </div>
+  import PiantaItem from "./PiantaItem.svelte";
+  import { Page, Block } from "framework7-svelte";
+  import Navbar from "./Navbar.svelte";
+  import { selected_family, selected_plant_scientific_name, selected_plant_name, selected_plant_photo } from "../js/store";
+  import { onMount } from "svelte";
+  import { DBContext } from "../db/DBContext";
+  import { capitalize, page_panic } from "../lib/helper";
+  import { get_plant_photo } from "../lib/wikipedia";
 
-        <!-- piantine -->
-        <div class="grid grid-cols-2">
-            <img src="/cacatus_rosso.png" alt="cacatus_rosso" width="140" height="140">
-            <div>
-                <h2>Basilico</h2>
-                <div class="grid grid-cols-2">
-                    <div>
-                        <h5 class="infobox" style="color:gray">Temp. media</h5>
-                        <h5 class="infobox">19</h5>
-                    </div>
-                    <div>
-                        <h5 class="infobox" style="color:gray">Umidità media</h5>
-                        <h5 class="infobox">60%</h5>
-                    </div>
-                </div>
-                <div>
-                    <h5 class="infobox" style="color:gray">Giorni impiegati per crescere</h5>
-                    <h5 class="infobox">25</h5>
-                </div>
-            </div>
-        </div>
-    </Block>
-</Page>
+  const PLANTS_DB = new DBContext();
+  let plants = [];
 
-<script>
-    export let f7router;
+  function ph_media(ph1: string, ph2: string) {
+    let media = (+ph1 + +ph2) / 2; // Cast ph1 and ph2 to string and do media. Very bad to read with unary operators, I know.
+    if (media == 0) return "?";
+    else return media;
+  }
 
-  import {
-    Page,
-    Block,
-    Navbar,
-    Button
-  } from 'framework7-svelte';
-  import { onMount } from 'svelte';
-  import { getCurrentUser } from '../lib/firebase_auth.js';
+  function growth_rate_to_about_days(growth_rate: string) {
+    switch (growth_rate) {
+      case "Rapid":
+        return "7";
+      case "Moderate":
+        return "7-20";
+      default:
+        return "?";
+    }
+  }
 
   onMount(async () => {
-    if((await getCurrentUser()).email != null){ // User is already logged in
-      f7router.navigate("/main/");  
+    await PLANTS_DB.init_capacitor_sqlite_plugin(); // Init web store and jeep sqlite
+    if (!(await PLANTS_DB.is_database_saved())) {
+      // If database is not saved in store we can't do anything in this page so abort and emit error
+      page_panic("Database non inizializzato. ", f7router);
     }
-  })
+    await PLANTS_DB.init_db(); // Create database on TypeORM
+
+    if ($selected_family == "" || $selected_family == null) {
+      page_panic("Nessuna famiglia presente nello store.", f7router);
+    }
+
+    plants = await PLANTS_DB.get_plants_by_family($selected_family);
+  });
+
+  async function select_plant(name: string, sci_name: string) {
+    $selected_plant_name = name;
+    $selected_plant_photo = await get_plant_photo(name);
+    $selected_plant_scientific_name = sci_name
+    f7router.navigate("/plant/");
+  }
 </script>
 
-<style>
-  .left {
-    position: relative;
-    top: -280px;
-    text-align: left;
-    padding-left: 5%;
-    color:#ffffff;
-  }
+<Page name="home">
+  <Navbar title={$selected_family} search_bar_placeholder="Cerca una pianta" />
 
-  .rectangle {
-    width: 100%;
-    height: 200px;
-    background-image: linear-gradient(to right,rgba(97, 210, 196, 1), rgba(41, 216, 144, 1));
-  }
+  <Block>
+    <!-- <List strongIos outlineIos dividersIos class="searchbar-not-found">
+      <ListItem title="Nothing found" />
+    </List> -->
 
-  .circle1 {
-    position: relative;
-    left: 190px;
-    top: -60px;
-    height: 220px;
-    width: 220px;
-    border-radius: 50%;
-    background-color: rgba(255, 255, 255, 0.15);
-  }
+    <br />
+    <!-- <List class="search-list searchbar-found"> -->
+    {#each plants as plant}
+      {#if plant.commonName != ""}
+        <!-- piantine -->
+        <div on:click={() => select_plant(plant.commonName, plant.scientificNameX)} on:keypress={() => {}}>
+          <PiantaItem
+            temp={plant.temperatureMinimumF == ""
+              ? "?"
+              : plant.temperatureMinimumF}
+            ph={ph_media(plant.pHMinimum, plant.pHMaximum)}
+            days={growth_rate_to_about_days(plant.growthRate)}
+            name={capitalize(plant.commonName)}
+          />
+        </div>
+      {:else}
+      <div on:click={() => select_plant(plant.scientificNameX, plant.scientificNameX)} on:keypress={() => {}}>
 
-  .circle2 {
-    position: relative;
-    left: 310px;
-    top: -110px;
-    height: 120px;
-    width: 120px;
-    border-radius: 50%;
-    background-color: rgba(255, 255, 255, 0.15),;
-  }
-
-  .infobox {
-    margin-top: -14px;
-  }
-
-  .freccia {
-    position: relative;
-    top: -300px;
-    width: 10%;
-    height: 20%;
-    padding-left: 5%;
-  }
-
-  .search_bar {
-    position: relative;
-    top: -290px;
-    padding-left: 5%;
-    padding-right: 5%;
-  }
-</style>
+        <!-- piantine -->
+        <PiantaItem
+          temp={plant.temperatureMinimumF == ""
+            ? "?"
+            : plant.temperatureMinimumF}
+          ph={ph_media(plant.pHMinimum, plant.pHMaximium)}
+          days={growth_rate_to_about_days(plant.growthRate)}
+          name={plant.scientificNameX}
+        />
+        </div>
+      {/if}
+    {/each}
+    <!-- </List> -->
+  </Block>
+</Page>

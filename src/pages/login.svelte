@@ -18,16 +18,22 @@
     import { FirebaseAuthentication } from "@capacitor-firebase/authentication";
 
     let email, password;
-    
+
     async function login() {
-        const result = await FirebaseAuthentication.signInWithEmailAndPassword({
-            email: email,
-            password: password,
-        });
-        if (result.user != null) {
-            f7router.navigate("/main/");
+        try {
+            const result =
+                await FirebaseAuthentication.signInWithEmailAndPassword({
+                    email: email,
+                    password: password,
+                });
+            if (result.user != null) {
+                f7router.navigate("/homepage/");
+            }
+        } catch (error) {
+            f7.dialog.alert(
+                "Account non esistente, controlla la password o la email."
+            );
         }
-        // Save user to store(maybe?)
     }
 </script>
 
@@ -81,6 +87,12 @@
     <Block>
         <Button on:click={login} fill>Accedi</Button>
         <br />
+
+        {#if import.meta.env.MODE == "development"}
+            <Button href="/homepage/" fill>Accesso DEV</Button>
+            <br />
+        {/if}
+
         <div class="text-align-center">
             Non hai un account?
             <span class="green_span">
