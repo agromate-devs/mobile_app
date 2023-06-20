@@ -10,7 +10,7 @@ import HomePage from '../pages/homepage.svelte';
 import IdentifyPlant from '../pages/identify_plant.svelte';
 import Species from '../pages/species.svelte';
 import AgrosmartView from '../pages/agrosmart_view.svelte';
-import WifiLoader from '../pages/wifi_loader';
+import WifiLoader from '../pages/wifi_loader.svelte';
 import ConnectionEsp from '../pages/connection_esp.svelte';
 
 
