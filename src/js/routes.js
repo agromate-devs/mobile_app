@@ -9,6 +9,9 @@ import ListPlant from '../pages/list_plant.svelte';
 import HomePage from '../pages/homepage.svelte';
 import IdentifyPlant from '../pages/identify_plant.svelte';
 import Species from '../pages/species.svelte';
+import AgrosmartView from '../pages/agrosmart_view.svelte';
+import WifiLoader from '../pages/wifi_loader';
+import ConnectionEsp from '../pages/connection_esp.svelte';
 
 
 import NotFoundPage from '../pages/404.svelte';
