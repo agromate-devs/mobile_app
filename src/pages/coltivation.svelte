@@ -52,7 +52,9 @@
         left: 25px;
     }
     .container{
-        display: grid;
+        display: flex;
+        gap: 50px;
+        flex-wrap: wrap;
     }
     button{
         width: 120px;
