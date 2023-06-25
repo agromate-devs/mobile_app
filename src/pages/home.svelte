@@ -26,7 +26,7 @@
 
         </div>
       </div>
-      <Button fill href="/connection_esp/">Avanti</Button>
+      <Button fill href="/coltivation/">Avanti</Button>
     </Block>
 </Page>
 

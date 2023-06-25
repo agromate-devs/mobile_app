@@ -12,6 +12,7 @@ import Species from '../pages/species.svelte';
 import AgrosmartView from '../pages/agrosmart_view.svelte';
 import WifiLoader from '../pages/wifi_loader.svelte';
 import ConnectionEsp from '../pages/connection_esp.svelte';
+import Coltivation from '../pages/coltivation.svelte';
 
 
 import NotFoundPage from '../pages/404.svelte';
@@ -61,7 +62,7 @@ var routes = [
     component: Species,
   },
   {
-    path: '/agrosmart_view/',
+    path: "/agrosmart_view/",
     component: AgrosmartView,
   },
   {
@@ -81,8 +82,12 @@ var routes = [
     component: ConnectionEsp,
   },
   {
+    path: "/coltivation/",
+    component: Coltivation,
+  },
+  {
     path: "/plant/",
-    component: PlantPage
+    component: PlantPage,
   },
   {
     path: "(.*)",
