@@ -10,14 +10,17 @@
     <!-- bottoni -->
 
     <div class="container">
-        <button>coltivation</button>
-        <button>coltivation</button>
-        <button>coltivation</button>
-        <button>coltivation</button>
-        <button>coltivation</button>
+        <button>Precipitazioni</button>
+        <button>Umidità</button>
+        <button>Ph del terreno</button>
+        <button>Temperatura</button>
+        <button>Illuminazione</button>
+    </div>
+    <div class="conferm">
+        <button id="annulla" >Annulla</button>
+        <button id="conferma" >continua</button>
     </div>
     
-
     
 </Page>
 
@@ -55,10 +58,22 @@
         display: flex;
         gap: 50px;
         flex-wrap: wrap;
+        padding-left: 25px;
+        padding-top: 50px;
     }
     button{
-        width: 120px;
-        height: 60px;
+        width: 150px;
+        height: 80px;
+        border-radius: 20px;
+        border: 5px solid rgba(97, 210, 196, 1);
+        font-size: 16px;
+    }
+    .conferm{
+        display: flex;
+        justify-content: space-between;
+        padding: 0 25px;
+        padding-top: 50px;
+        color: red;
     }
     
 
