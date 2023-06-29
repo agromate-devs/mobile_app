@@ -74,6 +74,20 @@
         padding: 0 25px;
         padding-top: 50px;
         color: red;
+        position: relative;
+        top: 80px;
+    }
+    #annulla{
+        background-color: red;
+        border: none;
+        border-radius: 10px;
+        font-size: 20px;
+    }
+    #conferma{
+        background-color: rgb(9, 231, 9);
+        border: none;
+        border-radius: 10px;
+        font-size: 20px;    
     }
     
 
