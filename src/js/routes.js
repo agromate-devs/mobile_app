@@ -13,6 +13,7 @@ import AgrosmartView from '../pages/agrosmart_view.svelte';
 import WifiLoader from '../pages/wifi_loader.svelte';
 import ConnectionEsp from '../pages/connection_esp.svelte';
 import Coltivation from '../pages/coltivation.svelte';
+import Temperature from '../pages/temperature.svelte';
 
 
 import NotFoundPage from '../pages/404.svelte';
@@ -84,6 +85,10 @@ var routes = [
   {
     path: "/coltivation/",
     component: Coltivation,
+  },
+  {
+    path: "/temperature/",
+    component: Temperature,
   },
   {
     path: "/plant/",

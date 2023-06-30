@@ -26,7 +26,7 @@
 
         </div>
       </div>
-      <Button fill href="/coltivation/">Avanti</Button>
+      <Button fill href="/temperature/">Avanti</Button>
     </Block>
 </Page>
 
