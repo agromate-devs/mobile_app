@@ -9,13 +9,26 @@
 
     <!-- slider -->
 
+    <div class="container">
+        <BlockTitle>Volume</BlockTitle>
+        <List simpleList strongIos outlineIos>
+            <ListItem>
+                <div>
+                    <Icon ios="f7:flame" md="material:flame" />
+                    
+                </div>
+            </ListItem>
+        </List>
+
+    </div>
+
     
     
     
 </Page>
 
 <script>
-    import {Page,Block,Navbar,Button} from 'framework7-svelte';
+    import { Navbar, Page, BlockTitle, Range, List, ListItem, Icon, Block } from 'framework7-svelte';
 </script>
 
 

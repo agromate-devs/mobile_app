@@ -27,7 +27,7 @@
         </div>
       </div>
       <Button fill href="/temperature/">Avanti</Button>
-    </Block>
+    </Block>  
 </Page>
 
 <style>
