@@ -54,3 +54,6 @@ www/
 # SQL WASM
 
 public/assets/sql-wasm.wasm
+
+# Stupid VsCode files
+*-workspace
