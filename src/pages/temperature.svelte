@@ -9,7 +9,7 @@
 
     <!-- slider -->
 
-    <div class="container">
+<div class="container">
         <BlockTitle>Temperature</BlockTitle>
         <List simpleList strongIos outlineIos>
             <ListItem>
@@ -25,7 +25,16 @@
     </ListItem>
         </List>
 
-    </div>
+</div>
+
+<div>
+        <div>
+            <List>
+                <!-- Additional "checkbox" prop to enable checkbox list item -->
+                <ListItem checkbox value="check_1" checked title="Inviami una notifica se temperatura errata" />
+            </List>
+        </div>
+</div>
 
     
     
