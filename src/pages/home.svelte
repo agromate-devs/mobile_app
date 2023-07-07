@@ -1,5 +1,5 @@
 <script>
-  import { Page, Block, Button } from "framework7-svelte";
+  import { Page, Block, Button, Tab, Tabs } from "framework7-svelte";
   export let f7router;
   export let f7route;
 
@@ -26,7 +26,7 @@
 
         </div>
       </div>
-      <Button fill href="/temperature/">Avanti</Button>
+      <Button fill href="/home2/">Avanti</Button>
     </Block>  
 </Page>
 

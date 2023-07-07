@@ -8,7 +8,7 @@
   import { Page, Block, Searchbar, Link } from "framework7-svelte";
   import { onMount } from "svelte";
   import { getCurrentUser, is_user_logged } from "../lib/firebase_auth.js";
-  import { current_page } from "../js/store";
+  import { current_page } from "../lib/store";
 
   let user = "";
   onMount(async () => {

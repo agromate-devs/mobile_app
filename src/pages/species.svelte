@@ -13,7 +13,7 @@
   import { onMount } from "svelte";
   import { DBContext } from "../db/DBContext";
   import { f7 } from "framework7-svelte";
-  import { selected_family } from "../js/store";
+  import { selected_family } from "../lib/store";
 
   const PLANTS_DB = new DBContext();
   let families = [];

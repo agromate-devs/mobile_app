@@ -19,7 +19,7 @@
   import { DBContext } from "../db/DBContext";
   import { Plant } from "../lib/models/plant";
     import { Usda } from "../db/entities/Usda.js";
-    import { selected_plant_name, selected_plant_photo, selected_plant_scientific_name } from "../js/store.js";
+    import { selected_plant_name, selected_plant_photo, selected_plant_scientific_name } from "../lib/store";
     import { get_plant_photo } from "../lib/wikipedia.js";
 
   const WISHLIST_API_ENDPOINT =
@@ -52,9 +52,10 @@
           }),
         })
       ).json();
-
+        console.log("AWS")
       localStorage.setItem("wishlist_plants", JSON.stringify(plants_raw));
     }else {
+      console.log("STORE")
       plants_raw = JSON.parse(plants_from_store);
     }
 

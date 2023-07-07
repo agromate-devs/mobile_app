@@ -14,7 +14,7 @@
         selected_plant_name,
         selected_family,
         selected_plant_scientific_name,
-    } from "../js/store";
+    } from "../lib/store";
     import { onMount } from "svelte";
     import { get_plant_description } from "../lib/wikipedia";
     import { getCurrentUser, get_current_user_jwt } from "../lib/firebase_auth";
@@ -49,7 +49,6 @@
                 }
             }),
         });
-        console.log(jwt);
     }
 
     onMount(async () => {
