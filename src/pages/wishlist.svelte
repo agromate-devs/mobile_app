@@ -19,7 +19,7 @@
   import { DBContext } from "../db/DBContext";
   import { Plant } from "../lib/models/plant";
     import { Usda } from "../db/entities/Usda.js";
-    import { selected_plant_name, selected_plant_photo, selected_plant_scientific_name } from "../lib/store";
+    import { latest_wishlist_change_device_uuid, selected_plant_name, selected_plant_photo, selected_plant_scientific_name } from "../lib/store";
     import { get_plant_photo } from "../lib/wikipedia.js";
 
   const WISHLIST_API_ENDPOINT =
@@ -37,9 +37,11 @@
 
     let plants_from_store = localStorage.getItem("wishlist_plants"); // Do some cache so we won't became poor for AWS lambda requests
 
+    let device_uuid = localStorage.getItem("device_uuid");
+
     let plants_raw: Plant[] = [];
 
-    if(plants_from_store == null) {
+    if(plants_from_store == null || $latest_wishlist_change_device_uuid != device_uuid) { // Update wishlist in case latest change is from different device
       // Backend
       let user = await getCurrentUser();
       let jwt = await get_current_user_jwt();

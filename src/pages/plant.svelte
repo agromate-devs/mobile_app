@@ -1,4 +1,5 @@
-<script>
+<script lang="ts">
+    export let f7router;
     import {
         Page,
         Searchbar,
@@ -14,11 +15,17 @@
         selected_plant_name,
         selected_family,
         selected_plant_scientific_name,
+        latest_wishlist_change_device_uuid,
+        firebase_app,
     } from "../lib/store";
     import { onMount } from "svelte";
     import { get_plant_description } from "../lib/wikipedia";
     import { getCurrentUser, get_current_user_jwt } from "../lib/firebase_auth";
-    import { v4 as uuidv4 } from 'uuid';
+    import { v4 as uuidv4 } from "uuid";
+    import { doc, getDoc, getFirestore, setDoc } from "firebase/firestore";
+    import { page_panic } from "../lib/helper";
+    import { AccountInfo } from "../lib/models/account_info";
+    import { Plant } from "../lib/models/plant";
 
     function go_back() {
         var view = f7.views.current;
@@ -28,12 +35,14 @@
     }
 
     let plant_description = "";
-    const WISHLIST_API_ENDPOINT = "https://v9t12m0y77.execute-api.eu-central-1.amazonaws.com/cors/wishlist";
+    const WISHLIST_API_ENDPOINT =
+        "https://v9t12m0y77.execute-api.eu-central-1.amazonaws.com/cors/wishlist";
     const DEFAULT_LIST_ID = 0;
 
     async function save_plant_into_wishlist() {
         let user = await getCurrentUser();
         let jwt = await get_current_user_jwt();
+        const plant_uuid = uuidv4();
         fetch(WISHLIST_API_ENDPOINT, {
             method: "POST",
             headers: new Headers({
@@ -45,10 +54,40 @@
                 list_id: DEFAULT_LIST_ID,
                 plant: {
                     name: $selected_plant_name,
-                    uuid: uuidv4()
-                }
+                    uuid: plant_uuid,
+                },
             }),
         });
+
+        $latest_wishlist_change_device_uuid =
+            localStorage.getItem("device_uuid");
+
+        const db = getFirestore($firebase_app);
+        const uid = (await getCurrentUser()).uid;
+
+        const docRef = doc(db, "utenti", uid);
+        const docSnap = await getDoc(docRef);
+
+        if (docSnap.exists()) {
+            let document = docSnap.data() as AccountInfo;
+
+            const device_uuid = localStorage.getItem("device_uuid");
+            $latest_wishlist_change_device_uuid = device_uuid;
+            document.latest_wishlist_change_device_uuid = device_uuid;
+
+            let wishlist_from_store: Plant[] = JSON.parse(localStorage.getItem("wishlist_plants"));
+            wishlist_from_store.push({
+                name: $selected_plant_name,
+                uuid: plant_uuid,
+            });
+            localStorage.setItem("wishlist_plants", JSON.stringify(wishlist_from_store));   // Update store
+
+            await setDoc(doc(db, "utenti", uid), document);
+        } else {
+            page_panic("Errore irrecuperabile durante il salvataggio in wishlist", f7router);
+        }
+
+        f7.dialog.alert("Pianta salvata nella lista dei desideri!");
     }
 
     onMount(async () => {
