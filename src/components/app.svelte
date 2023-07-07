@@ -1,14 +1,24 @@
 <script lang="ts">
   import { onMount } from "svelte";
   import { getDevice } from "framework7/lite-bundle";
-  import { f7, f7ready, App, View, Toolbar, Link, Tab, Tabs } from "framework7-svelte";
+  import {
+    f7,
+    f7ready,
+    App,
+    View,
+    Toolbar,
+    Link,
+    Tab,
+    Tabs,
+  } from "framework7-svelte";
   import { initializeApp } from "firebase/app";
   import { firebaseConfig } from "../lib/firebase_config.js";
   import capacitorApp from "../js/capacitor-app";
   import routes from "../js/routes";
-  import { current_page } from "../js/store";
+  import { current_page, firebase_app } from "../lib/store";
 
-  const app = initializeApp(firebaseConfig);
+  $firebase_app = initializeApp(firebaseConfig);
+
 
   const device = getDevice();
   // Framework7 Parameters
@@ -48,14 +58,18 @@
     });
   });
   function change_tab(new_page, tapped_tab: string) {
+    console.log(tapped_tab);
     const active_elements = document.getElementsByClassName("tab-link-active");
-    
-    for(let i = 0; i < active_elements.length; i++) {
+    const tapped_element = document.getElementById(tapped_tab);
+    if(tapped_element != null) {
+      for (let i = 0; i < active_elements.length; i++) {
       active_elements[i].classList.remove("tab-link-active");
     }
 
-    document.getElementById(tapped_tab).classList.add("tab-link-active");
-    f7.views.main.router.navigate(new_page)
+    tapped_element.classList.add("tab-link-active");
+    }
+    f7.views.main.router.navigate(new_page);
+
   }
 </script>
 
@@ -70,7 +84,7 @@
           text="Homepage"
           iconIos="f7:home"
           iconMd="material:home"
-          on:click={() => change_tab("/", "tab-1")}
+          on:click={() => change_tab("/homepage/", "tab-1")}
         />
         <Link
           id="tab-2"
