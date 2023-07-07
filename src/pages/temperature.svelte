@@ -9,17 +9,32 @@
 
     <!-- slider -->
 
-    <div class="container">
-        <BlockTitle>Volume</BlockTitle>
+<div class="container">
+        <BlockTitle>Temperature</BlockTitle>
         <List simpleList strongIos outlineIos>
             <ListItem>
-                <div>
-                    <Icon ios="f7:flame" md="material:flame" />
-                </div>
-            </ListItem>
+      <div>
+        <Icon ios="f7:thermometer" md="material:thermometer" />
+      </div>
+      <div style="width: 100%; margin: 0 16px">
+        <Range min={0} max={100} step={1} value={50} label={true} color="orange" />
+      </div>
+      <div>
+        <Icon ios="f7:sun_max_fill" md="material:brightness_high" />
+      </div>
+    </ListItem>
         </List>
 
-    </div>
+</div>
+
+<div>
+        <div>
+            <List>
+                <!-- Additional "checkbox" prop to enable checkbox list item -->
+                <ListItem checkbox value="check_1" checked title="Inviami una notifica se temperatura errata" />
+            </List>
+        </div>
+</div>
 
     
     
