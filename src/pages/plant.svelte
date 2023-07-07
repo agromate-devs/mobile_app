@@ -13,10 +13,12 @@
         selected_plant_photo,
         selected_plant_name,
         selected_family,
-        selected_plant_scientific_name
+        selected_plant_scientific_name,
     } from "../js/store";
     import { onMount } from "svelte";
     import { get_plant_description } from "../lib/wikipedia";
+    import { getCurrentUser, get_current_user_jwt } from "../lib/firebase_auth";
+    import { v4 as uuidv4 } from 'uuid';
 
     function go_back() {
         var view = f7.views.current;
@@ -26,10 +28,33 @@
     }
 
     let plant_description = "";
+    const WISHLIST_API_ENDPOINT = "https://v9t12m0y77.execute-api.eu-central-1.amazonaws.com/cors/wishlist";
+    const DEFAULT_LIST_ID = 0;
+
+    async function save_plant_into_wishlist() {
+        let user = await getCurrentUser();
+        let jwt = await get_current_user_jwt();
+        fetch(WISHLIST_API_ENDPOINT, {
+            method: "POST",
+            headers: new Headers({
+                authorization: jwt.token,
+                "content-type": "application/x-www-form-urlencoded",
+            }),
+            body: JSON.stringify({
+                uid: user.uid,
+                list_id: DEFAULT_LIST_ID,
+                plant: {
+                    name: $selected_plant_name,
+                    uuid: uuidv4()
+                }
+            }),
+        });
+        console.log(jwt);
+    }
 
     onMount(async () => {
         plant_description = await get_plant_description($selected_plant_name);
-    })
+    });
 </script>
 
 <Page>
@@ -44,7 +69,11 @@
 
         <!-- searchbar cambiare colore-->
         <div class="search_bar">
-            <Fab position="right-top" color="red">
+            <Fab
+                position="right-top"
+                color="red"
+                on:click={save_plant_into_wishlist}
+            >
                 <Icon ios="f7:heart_fill" md="f7:heart_fill" />
             </Fab>
         </div>
@@ -72,7 +101,6 @@
             </div>
         </div>
     </div>
-    
 </Page>
 
 <style>
@@ -103,7 +131,7 @@
     .info_container {
         padding-left: 5%;
     }
-    
+
     .btn_container {
         padding-right: 5%;
     }

@@ -20,6 +20,7 @@ import NotFoundPage from '../pages/404.svelte';
 import LoginPage from '../pages/login.svelte';
 import RegistratiPage from '../pages/registrati.svelte';
 import PlantPage from '../pages/plant.svelte';
+import WishlistPage from '../pages/wishlist.svelte';
 
 var routes = [
   {
@@ -93,6 +94,10 @@ var routes = [
   {
     path: "/plant/",
     component: PlantPage,
+  },
+  {
+    path: "/wishlist/",
+    component: WishlistPage
   },
   {
     path: "(.*)",

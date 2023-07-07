@@ -8,3 +8,7 @@ export const getCurrentUser = async () => {
 export const is_user_logged = () => {
     return localStorage.getItem("user");
 }
+
+export const get_current_user_jwt = async () => {
+    return await FirebaseAuthentication.getIdToken();
+}

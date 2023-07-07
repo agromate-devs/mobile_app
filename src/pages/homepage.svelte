@@ -51,7 +51,7 @@
         <ButtonHome
           text="Esplora"
           img="/home-fotocamera.png"
-          href="/list_plant/"
+          href="/species/"
         />
 
         <Link href="/species/">

@@ -99,4 +99,22 @@ export class DBContext {
         .groupBy("usda.Common_Name")
         .getMany();
     }
+
+    async get_plant_by_common_name(common_name: string) {
+        return await this.datasource
+        .getRepository(Usda)
+        .createQueryBuilder("usda")
+        // .select("usda.id")
+        // .addSelect("usda.family")
+        // .addSelect("usda.Common_Name")
+        // .addSelect("usda.Scientific_Name_x")
+        // .addSelect("usda.Precipitation_Minimum")
+        // .addSelect("usda.Precipitation_Maximum")
+        // .addSelect("usda.pH_Minimum")
+        // .addSelect("usda.pH_Maximum")
+        // .addSelect("usda.Temperature_Minimum_F")
+        // .addSelect("usda.Growth_Rate")
+        .where("usda.Common_Name = :Name", { Name: common_name })
+        .getOne();
+    }
 }

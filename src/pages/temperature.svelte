@@ -15,7 +15,6 @@
             <ListItem>
                 <div>
                     <Icon ios="f7:flame" md="material:flame" />
-                    
                 </div>
             </ListItem>
         </List>
