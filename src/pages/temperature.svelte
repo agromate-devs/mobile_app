@@ -31,9 +31,17 @@
         <div>
             <List>
                 <!-- Additional "checkbox" prop to enable checkbox list item -->
-                <ListItem checkbox value="check_1" checked title="Inviami una notifica se temperatura errata" />
+                <ListItem checkbox value="check_1" checked title="Notifica in caso di temperatura errata" />
             </List>
         </div>
+</div>
+
+<div>
+    <div>
+        <List>
+            <ListButton title="Conferma" class="color-[white]" />
+        </List>
+    </div>
 </div>
 
     
@@ -42,7 +50,7 @@
 </Page>
 
 <script>
-    import { Navbar, Page, BlockTitle, Range, List, ListItem, Icon, Block } from 'framework7-svelte';
+    import { Navbar, Page, BlockTitle, Range, List, ListItem, Icon, ListButton, Block } from 'framework7-svelte';
 </script>
 
 
@@ -71,6 +79,7 @@
         top: 15%;
         left: 25px;
     }
+    
     
     
 
