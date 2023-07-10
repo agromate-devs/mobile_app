@@ -14,13 +14,11 @@
         <List simpleList strongIos outlineIos>
             <ListItem>
       <div>
-        <Icon ios="f7:thermometer" md="material:thermometer" />
+        <Icon ios="f7:thermometer" md="f7:thermometer" />
       </div>
-      <div style="width: 100%; margin: 0 16px">
-        <Range min={0} max={100} step={1} value={50} label={true} color="orange" />
-      </div>
-      <div>
-        <Icon ios="f7:sun_max_fill" md="material:brightness_high" />
+      <div style="width: 100%; margin: 0 16px" class= "display-flex flex-direction-row" >
+        <Range min={0} max={100} step={1} bind:value={temperature} label={true} color="orange" />
+        <span style="position: relative; left: 15px; margin: 0;">{temperature}C</span>
       </div>
     </ListItem>
         </List>
@@ -51,6 +49,10 @@
 
 <script>
     import { Navbar, Page, BlockTitle, Range, List, ListItem, Icon, ListButton, Block } from 'framework7-svelte';
+
+    let temperature = 0;
+
+
 </script>
 
 
@@ -79,9 +81,5 @@
         top: 15%;
         left: 25px;
     }
-    
-    
-    
-
 </style>
 
