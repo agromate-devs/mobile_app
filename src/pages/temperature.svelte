@@ -17,8 +17,8 @@
         <Icon ios="f7:thermometer" md="f7:thermometer" />
       </div>
       <div style="width: 100%; margin: 0 16px" class= "display-flex flex-direction-row" >
-        <Range min={0} max={100} step={1} bind:value={temperature} label={true} color="orange" />
-        <span style="position: relative; left: 15px; margin: 0;">{temperature}C</span>
+        <Range min={0} max={100} step={1} bind:value={temperature} label={true} color="orange" style="margin: 0;" />
+        <span style="position: relative; left: 15px; margin: 0;">{temperature}C</span> 
       </div>
     </ListItem>
         </List>
@@ -35,9 +35,9 @@
 </div>
 
 <div>
-    <div>
+    <div style="display: flex; justify-content: center;">
         <List>
-            <ListButton title="Conferma" class="color-[white]" />
+            <ListButton title="Conferma" style="background-color: #2DDA93; color: white; width: 150px; " />
         </List>
     </div>
 </div>
@@ -65,7 +65,6 @@
         position: relative;
         top: 50%;
         right: 10px;
-
     }
     .container-green{
         background-image: linear-gradient(to right,rgba(97, 210, 196, 1), rgba(41, 216, 144, 1));
@@ -81,5 +80,6 @@
         top: 15%;
         left: 25px;
     }
+    
 </style>
 
