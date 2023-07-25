@@ -14,6 +14,7 @@ import WifiLoader from '../pages/wifi_loader.svelte';
 import ConnectionEsp from '../pages/connection_esp.svelte';
 import Coltivation from '../pages/coltivation.svelte';
 import Temperature from '../pages/temperature.svelte';
+import Illuminazione from '../pages/illuminazione.svelte';
 
 
 import NotFoundPage from '../pages/404.svelte';
@@ -94,6 +95,10 @@ var routes = [
   {
     path: "/plant/",
     component: PlantPage,
+  },
+  {
+    path: "/illuminazione/",
+    component: Illuminazione,
   },
   {
     path: "/wishlist/",
