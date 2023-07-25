@@ -15,6 +15,8 @@ import ConnectionEsp from '../pages/connection_esp.svelte';
 import Coltivation from '../pages/coltivation.svelte';
 import Temperature from '../pages/temperature.svelte';
 import Illuminazione from '../pages/illuminazione.svelte';
+import Precipitazioni from '../pages/precipitazioni.svelte';
+import Umidita from '../pages/umidita.svelte';
 
 
 import NotFoundPage from '../pages/404.svelte';
@@ -99,6 +101,14 @@ var routes = [
   {
     path: "/illuminazione/",
     component: Illuminazione,
+  },
+  {
+    path: "/preceipitazioni/",
+    component: Precipitazioni,
+  },
+  {
+    path: "/umidita/",
+    component: Umidita,
   },
   {
     path: "/wishlist/",
