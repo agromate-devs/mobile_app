@@ -16,24 +16,22 @@
     page_panic,
     ph_media,
   } from "../lib/helper";
-  import { DBContext } from "../db/DBContext";
   import { Plant } from "../lib/models/plant";
     import { Usda } from "../db/entities/Usda.js";
-    import { latest_wishlist_change_device_uuid, selected_plant_name, selected_plant_photo, selected_plant_scientific_name } from "../lib/store";
+    import { PLANTS_DB_CONTEXT, latest_wishlist_change_device_uuid, selected_plant_name, selected_plant_photo, selected_plant_scientific_name } from "../lib/store";
     import { get_plant_photo } from "../lib/wikipedia.js";
 
   const WISHLIST_API_ENDPOINT =
     "https://v9t12m0y77.execute-api.eu-central-1.amazonaws.com/cors/wishlist";
-  const PLANTS_DB = new DBContext();
 
   let plants: Usda[] = [];
   onMount(async () => {
-    await PLANTS_DB.init_capacitor_sqlite_plugin(); // Init web store and jeep sqlite
-    if (!(await PLANTS_DB.is_database_saved())) {
+    await $PLANTS_DB_CONTEXT.init_capacitor_sqlite_plugin(); // Init web store and jeep sqlite
+    if (!(await $PLANTS_DB_CONTEXT.is_database_saved())) {
       // If database is not saved in store we can't do anything in this page so abort and emit error
       page_panic("Database non inizializzato.", f7router);
     }
-    await PLANTS_DB.init_db(); // Create database on TypeORM
+    await $PLANTS_DB_CONTEXT.init_db(); // Create database on TypeORM
 
     let plants_from_store = localStorage.getItem("wishlist_plants"); // Do some cache so we won't became poor for AWS lambda requests
 
@@ -63,7 +61,7 @@
 
 
     plants_raw.forEach(async plant => {
-      let plant_from_db = await PLANTS_DB.get_plant_by_common_name(plant.name);
+      let plant_from_db = await $PLANTS_DB_CONTEXT.get_plant_by_common_name(plant.name);
       if(plant_from_db != null){
         plants.push(plant_from_db)
         plants = plants; // Refresh array

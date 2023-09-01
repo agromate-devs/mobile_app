@@ -11,40 +11,38 @@
     ListIndex,
   } from "framework7-svelte";
   import { onMount } from "svelte";
-  import { DBContext } from "../db/DBContext";
   import { f7 } from "framework7-svelte";
-  import { selected_family } from "../lib/store";
+  import { PLANTS_DB_CONTEXT, selected_family } from "../lib/store";
 
-  const PLANTS_DB = new DBContext();
   let families = [];
   let letters = [];
 
   async function import_records() {
     const plants = (await (await fetch("usda_light.sql")).text()).split("\n");
     for (let index = 0; index < plants.length; index++) {
-      await PLANTS_DB.query(plants[index]);
+      await $PLANTS_DB_CONTEXT.query(plants[index]);
     }
   }
 
   async function import_schema() {
     const schema = await (await fetch("usda_tables.sql")).text();
-    await PLANTS_DB.query(schema);
+    await $PLANTS_DB_CONTEXT.query(schema);
   }
 
   onMount(async () => {
     f7.dialog.preloader(
       "Caricamento Database in corso... L'operazione potrebbe richiedere qualche minuto"
     );
-    await PLANTS_DB.init_capacitor_sqlite_plugin(); // Init web store and jeep sqlite
-    if (!(await PLANTS_DB.is_database_saved())) {
-      await PLANTS_DB.init_db(); // Create database on TypeORM
+    await $PLANTS_DB_CONTEXT.init_capacitor_sqlite_plugin(); // Init web store and jeep sqlite
+    if (!(await $PLANTS_DB_CONTEXT.is_database_saved())) {
+      await $PLANTS_DB_CONTEXT.init_db(); // Create database on TypeORM
       await import_schema(); // Import schema
       await import_records(); // Import plants
-      await PLANTS_DB.save_database(); // Save DB
+      await $PLANTS_DB_CONTEXT.save_database(); // Save DB
     } else {
-      await PLANTS_DB.init_db(); // Create database on TypeORM
+      await $PLANTS_DB_CONTEXT.init_db(); // Create database on TypeORM
     }
-    families = await PLANTS_DB.get_all_plants(); // Get all families
+    families = await $PLANTS_DB_CONTEXT.get_all_plants(); // Get all families
     let unique_letters = new Set( // Get all unique letters of plants for the list
       families.map((family) => family.family.charAt(0))
     );

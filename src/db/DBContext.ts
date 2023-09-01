@@ -10,6 +10,7 @@ import {
 } from "@capacitor-community/sqlite";
 import { DataSource } from 'typeorm';
 import { Usda } from './entities/Usda';
+import { Capacitor } from "@capacitor/core";
 
 export class DBContext {
     private initial_db = {
@@ -49,6 +50,8 @@ export class DBContext {
     constructor() { }
 
     async init_db() {   // Initialize TypeORM
+        if(this.datasource != null) // Avoid to open multiple SQLite connections
+            return;
         await this.sqlite.importFromJson(JSON.stringify(this.initial_db));
         this.datasource = new DataSource({
             type: "capacitor",
