@@ -1,4 +1,4 @@
-BEGIN TRANSACTION;
+-- BEGIN TRANSACTION;
 CREATE TABLE IF NOT EXISTS "usda" (
 	"id"	integer NOT NULL,
 	"Scientific_Name_x"	varchar,
@@ -92,4 +92,4 @@ CREATE TABLE IF NOT EXISTS "usda" (
 	"Genus"	varchar,
 	CONSTRAINT "PK_ID" PRIMARY KEY("id")
 );
-COMMIT;
+-- COMMIT;

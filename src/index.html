@@ -16,8 +16,12 @@
   <meta name="theme-color" content="#212121">
   <meta name="format-detection" content="telephone=no">
   <meta name="msapplication-tap-highlight" content="no">
-  <title>AgroMate</title>  
-  
+  <title>AgroMate</title>
+  <!-- Dirty hack to use Buffer module in TypeORM -->
+  <script type="module">
+    import { Buffer } from "buffer";
+    window.Buffer = Buffer;
+  </script>   
   <!-- built styles file will be auto injected -->
 </head>
 <body>

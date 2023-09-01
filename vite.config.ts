@@ -17,7 +17,7 @@ export default async () => {
     publicDir: PUBLIC_DIR,
     build: {
       commonjsOptions: {
-        include:[]
+        exclude:["sha.js"],
       },
       outDir: BUILD_DIR,
       assetsInlineLimit: 0,

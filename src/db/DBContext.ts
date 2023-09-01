@@ -36,15 +36,15 @@ export class DBContext {
     }
 
     async init_capacitor_sqlite_plugin() {
-        this.init_jeep_sqlite();
-
+        if(this.sqlite != null) // Avoid to open multiple SQLite connections
+            return;
         this.sqlite = new SQLiteConnection(CapacitorSQLite);
 
-        // await customElements.whenDefined("jeep-sqlite");
         // Initialize the Web store
-        await this.sqlite.initWebStore();
-
-
+        if(Capacitor.getPlatform() == "web") {
+            this.init_jeep_sqlite();
+            await this.sqlite.initWebStore();
+        }
     }
 
     constructor() { }
@@ -76,7 +76,8 @@ export class DBContext {
     }
 
     async save_database() {
-        await this.sqlite.saveToStore("plants");
+        if(Capacitor.getPlatform() == "web")
+            await this.sqlite.saveToStore("plants");
     }
 
     async get_all_plants() {
