@@ -26,7 +26,7 @@
 
         </div>
       </div>
-      <Button fill href="/umidita/">Avanti</Button>
+      <Button fill href="/connection_esp/">Avanti</Button>
     </Block>  
 </Page>
 
