@@ -12,12 +12,10 @@
   let plants = [];
 
   onMount(async () => {
-    await $PLANTS_DB_CONTEXT.init_capacitor_sqlite_plugin(); // Init web store and jeep sqlite
     if (!(await $PLANTS_DB_CONTEXT.is_database_saved())) {
       // If database is not saved in store we can't do anything in this page so abort and emit error
       page_panic("Database non inizializzato. ", f7router);
     }
-    await $PLANTS_DB_CONTEXT.init_db(); // Create database on TypeORM
 
     if ($selected_family == "" || $selected_family == null) {
       page_panic("Nessuna famiglia presente nello store.", f7router);

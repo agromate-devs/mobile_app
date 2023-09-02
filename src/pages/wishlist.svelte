@@ -31,7 +31,6 @@
       // If database is not saved in store we can't do anything in this page so abort and emit error
       page_panic("Database non inizializzato.", f7router);
     }
-    await $PLANTS_DB_CONTEXT.init_db(); // Create database on TypeORM
 
     let plants_from_store = localStorage.getItem("wishlist_plants"); // Do some cache so we won't became poor for AWS lambda requests
 

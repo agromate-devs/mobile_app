@@ -33,15 +33,18 @@
     f7.dialog.preloader(
       "Caricamento Database in corso... L'operazione potrebbe richiedere qualche minuto"
     );
-    await $PLANTS_DB_CONTEXT.init_capacitor_sqlite_plugin(); // Init web store and jeep sqlite
-    if (!(await $PLANTS_DB_CONTEXT.is_database_saved())) {
-      await $PLANTS_DB_CONTEXT.init_db(); // Create database on TypeORM
-      await import_schema(); // Import schema
-      await import_records(); // Import plants
-      await $PLANTS_DB_CONTEXT.save_database(); // Save DB
-    } else {
-      await $PLANTS_DB_CONTEXT.init_db(); // Create database on TypeORM
+    if (!$PLANTS_DB_CONTEXT.is_database_ready()) {
+      await $PLANTS_DB_CONTEXT.init_capacitor_sqlite_plugin(); // Init web store and jeep sqlite
+      if (!(await $PLANTS_DB_CONTEXT.is_database_saved())) {
+        await $PLANTS_DB_CONTEXT.init_db(); // Create database on TypeORM
+        await import_schema(); // Import schema
+        await import_records(); // Import plants
+        await $PLANTS_DB_CONTEXT.save_database(); // Save DB
+      } else {
+        await $PLANTS_DB_CONTEXT.init_db(); // Create database on TypeORM
+      }
     }
+
     families = await $PLANTS_DB_CONTEXT.get_all_plants(); // Get all families
     let unique_letters = new Set( // Get all unique letters of plants for the list
       families.map((family) => family.family.charAt(0))
@@ -58,7 +61,11 @@
 
 <Page name="home">
   <!-- navbar -->
-  <CustomNavbar title="Esplora" search_bar search_bar_placeholder="Cerca una specie" />
+  <CustomNavbar
+    title="Esplora"
+    search_bar
+    search_bar_placeholder="Cerca una specie"
+  />
   <br />
   <List strongIos outlineIos dividersIos class="searchbar-not-found">
     <ListItem title="Nothing found" />

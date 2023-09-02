@@ -63,6 +63,10 @@ export class DBContext {
         await this.datasource.initialize();
     }
 
+    is_database_ready() {
+        return this.datasource != null && this.sqlite != null;
+    }
+
     async query(query: string) {    // Helper to scaffold DB
         return await this.datasource.query(query);
     }
