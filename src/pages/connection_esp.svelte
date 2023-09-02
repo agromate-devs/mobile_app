@@ -28,17 +28,20 @@
 </Page>
 
 <script>
-    import { Page, f7 } from 'framework7-svelte';
+    import { Page } from 'framework7-svelte';
     import { CapacitorWifi } from 'capacitorjs-plugin-wifi';
-
-    // async function checkPermissionResult() {
-    //     let result = await CapacitorWifi.checkPermission();
-    //     f7.dialog.alert(result.status)
-    // }
 
     let wifi = [];
 
+    async function checkPermissionResult() {
+    let result = await CapacitorWifi.checkPermission();
+    if(result.status != "true") {
+        CapacitorWifi.requestPermission();
+    }
+  }
+
     async function scanWifiResult() {
+        await checkPermissionResult();
         let result = await CapacitorWifi.wifiScan();
         wifi = result.networks;
     }
