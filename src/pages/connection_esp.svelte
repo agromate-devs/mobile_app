@@ -36,9 +36,9 @@
 </Page>
 
 <script>
+    export let f7router;
     import { Page } from 'framework7-svelte';
     import { CapacitorWifi } from 'capacitorjs-plugin-wifi';
-    import { f7router } from './home.svelte';
 
     let wifi = [];
 
