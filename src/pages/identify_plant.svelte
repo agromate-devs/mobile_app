@@ -5,7 +5,7 @@
       </div>
       <div class="BIG-text">
         <h1>Accoppia un nuovo sensore</h1>
-        <Button fill href="/homepage/">Avvia la ricerca</Button>
+        <Button fill href="/connection_esp/">Avvia la ricerca</Button>
         <div style="color:gray">
           <h4>La ricerca richieda la geolocalizzazione attiva, una rete wifi 2.4/5ghz e può richiedere alcuni minuti</h4>
         </div>

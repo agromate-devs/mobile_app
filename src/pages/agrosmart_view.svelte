@@ -1,63 +1,34 @@
 <Page name="home">
-    <div class="rectangle">
-        <div class="circle1"></div>
-        <div class="circle2"></div>
-        <CustomNavbar title=""></CustomNavbar>
-        <div class="center">
-          <img src="/foto-profile.png" alt="foto_profile" width="120" height="120">
-          <div style="color:#ffffff;">
-            <h1>Ciro Esposito</h1>
-            <h4 class="subtitle"><img src="/segnaposto.png" alt="segnaposto" width="15" height="15">  200 piante piantate</h4>
-          </div>
-        </div>
+  <div class="rectangle">
+    <div class="circle1"></div>
+    <div class="circle2"></div>
+    <div class="freccia">
+      <a class="link" href="/">
+        <img src="/freccio.png" alt="freccio" width="75%">
+      </a>
     </div>
+    <div class="center">
+      <img src="/foto-profile.png" alt="foto_profile" width="120" height="120">
+      <div style="color:#ffffff;">
+        <h1>Ciro Esposito</h1>
+        <h4 class="subtitle"><img src="/segnaposto.png" alt="segnaposto" width="15" height="15">  200 piante piantate</h4>
+      </div>
+    </div>
+</div>
     <Block>
-        <!-- agrosmart -->
-        <div class="container">
-          <div style="margin-top: 20px;">
-            <img src="/agrosmart.png" alt="foto_profile" width="100" height="100">
-          </div>
-          <div>
-            <h1>AgroSmat v1</h1>
-            <div class="grid grid-cols-2 grid-gap">
-              <div>
-                <h4 class="infobox">Potenza segnale</h4>
-                <h4 class="infobox">86%</h4>
-              </div>
-              <div>
-                <h4 class="infobox">Versione SW</h4>
-                <h4 class="infobox">1.2.0</h4>
-              </div>
-            </div>
-          </div>
-        </div>
-        <Button fill>Aggiorna</Button>
-        <!-- agrosmart -->
-        <div class="container">
-          <div style="margin-top: 20px;">
-            <img src="/agrosmart.png" alt="foto_profile" width="100" height="100">
-          </div>
-          <div>
-            <h1>AgroSmat v1</h1>
-            <div class="grid grid-cols-2 grid-gap">
-              <div>
-                <h4 class="infobox">Potenza segnale</h4>
-                <h4 class="infobox">86%</h4>
-              </div>
-              <div>
-                <h4 class="infobox">Versione SW</h4>
-                <h4 class="infobox">1.2.0</h4>
-              </div>
-            </div>
-          </div>
-        </div>
-        <Button fill>Aggiorna</Button>
+        <Agrosmart device_name="Agrosmart v1" signal_level={86} sw_version="1.2.0" update_available={false}></Agrosmart>
+    </Block>
+
+    <Block>
+
+      <Button fill href="/identify_plant/">Accoppia un nuovo dispositivo</Button>
+
     </Block>
 </Page>
 
 <script>
     export let f7router;
-
+  import Agrosmart from '../components/Agrosmart.svelte';
   import {
     Page,
     Block,
@@ -112,12 +83,6 @@
     position: relative;
     top: -18px;
   }
-
-  .infobox {
-    margin-top: -14px;
-    color: gray;
-  }
-
   .freccia {
     position: relative;
     top: -460px;
@@ -126,9 +91,5 @@
     padding-left: 5%;
   }
 
-  .container {    /* serve custom */
-    display: grid;
-    grid-template-columns: 35% 65%;
-    grid-template-rows: auto;
-  }
+
 </style>
