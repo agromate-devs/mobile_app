@@ -1,5 +1,6 @@
 <script lang="ts">
-    export let title, search_bar_placeholder;
+    // We call this component CustomNavbar to avoid conflicts with f7 navbar
+    export let title: string, search_bar: boolean = false, search_bar_placeholder: string | null = null;
 
     import { Searchbar, f7 } from "framework7-svelte";
 
@@ -23,20 +24,22 @@
         <h1>{title}</h1>
     </div>
 
-    <!-- searchbar cambiare colore-->
-    <div class="search_bar">
-        <Searchbar
-            searchContainer=".search-list"
-            searchIn=".item-title"
-            placeholder={search_bar_placeholder}
-        />
-    </div>
+    {#if search_bar}
+        <!-- searchbar cambiare colore-->
+        <div class="search_bar">
+            <Searchbar
+                searchContainer=".search-list"
+                searchIn=".item-title"
+                placeholder={search_bar_placeholder}
+            />
+        </div>
+    {/if}
 </div>
 
 <style>
     .left {
         position: relative;
-        top: -280px;
+        top: -300px;
         text-align: left;
         padding-left: 5%;
         color: #ffffff;

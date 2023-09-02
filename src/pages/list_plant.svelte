@@ -3,7 +3,7 @@
 
   import PiantaItem from "./PiantaItem.svelte";
   import { Page, Block } from "framework7-svelte";
-  import Navbar from "./Navbar.svelte";
+  import CustomNavbar from "../components/CustomNavbar.svelte";
   import { selected_family, selected_plant_scientific_name, selected_plant_name, selected_plant_photo, PLANTS_DB_CONTEXT } from "../lib/store";
   import { onMount } from "svelte";
   import { capitalize, growth_rate_to_about_days, page_panic, ph_media } from "../lib/helper";
@@ -35,7 +35,7 @@
 </script>
 
 <Page name="home">
-  <Navbar title={$selected_family} search_bar_placeholder="Cerca una pianta" />
+  <CustomNavbar title={$selected_family} search_bar search_bar_placeholder="Cerca una pianta" />
 
   <Block>
     <!-- <List strongIos outlineIos dividersIos class="searchbar-not-found">

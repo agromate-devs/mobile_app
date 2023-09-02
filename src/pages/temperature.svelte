@@ -7,9 +7,9 @@
         List,
         ListItem,
         Icon,
-        ListButton,
-        Block,
+        ListButton
     } from "framework7-svelte";
+    import CustomNavbar from "../components/CustomNavbar.svelte";
 
     let temperature = 0;
 </script>
@@ -17,10 +17,7 @@
 <Page name="home">
     <!-- blocco verde -->
 
-    <div class="container-green">
-        <img src="/freccio.png" id="freccia" alt="freccia" />
-        <h1>Temperatura</h1>
-    </div>
+    <CustomNavbar title="Temperatura"></CustomNavbar>
 
     <!-- slider -->
 
@@ -86,22 +83,5 @@
         position: relative;
         top: 50%;
         right: 10px;
-    }
-    .container-green {
-        background-image: linear-gradient(
-            to right,
-            rgba(97, 210, 196, 1),
-            rgba(41, 216, 144, 1)
-        );
-        height: 180px;
-        display: flex;
-        align-items: left;
-    }
-    #freccia {
-        width: 35px;
-        height: 35px;
-        position: relative;
-        top: 15%;
-        left: 25px;
     }
 </style>

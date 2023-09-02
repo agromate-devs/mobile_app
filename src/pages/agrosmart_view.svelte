@@ -2,11 +2,7 @@
     <div class="rectangle">
         <div class="circle1"></div>
         <div class="circle2"></div>
-        <div class="freccia">
-          <a class="link" href="/">
-            <img src="/freccio.png" alt="freccio" width="75%">
-          </a>
-        </div>
+        <CustomNavbar title=""></CustomNavbar>
         <div class="center">
           <img src="/foto-profile.png" alt="foto_profile" width="120" height="120">
           <div style="color:#ffffff;">
@@ -70,6 +66,7 @@
   } from 'framework7-svelte';
   import { onMount } from 'svelte';
   import { getCurrentUser } from '../lib/firebase_auth.js';
+    import CustomNavbar from '../components/CustomNavbar.svelte';
 
   onMount(async () => {
     if((await getCurrentUser()).email != null){ // User is already logged in

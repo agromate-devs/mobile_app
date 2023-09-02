@@ -2,10 +2,7 @@
 
     <!-- blocco verde -->
     
-    <div class="container-green">
-        <img src="/freccio.png" id="freccia" alt="freccia">
-        <h1>Connessione</h1>
-    </div>
+    <CustomNavbar title="I miei dispositivi"></CustomNavbar>
 
     <!-- elenco esp -->
 
@@ -30,6 +27,7 @@
 <script>
     import { Page } from 'framework7-svelte';
     import { CapacitorWifi } from 'capacitorjs-plugin-wifi';
+    import CustomNavbar from '../components/CustomNavbar.svelte';
 
     let wifi = [];
 

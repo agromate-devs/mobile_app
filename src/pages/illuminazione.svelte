@@ -1,28 +1,31 @@
 <script>
     import {
-        Navbar,
         Page,
-        BlockTitle,
         Range,
         List,
         ListItem,
         Icon,
         ListButton,
         ListInput,
-        Block,
+        f7
     } from "framework7-svelte";
+    import CustomNavbar from "../components/CustomNavbar.svelte";
 
     let illuminazione = 0;
     let wheePickerValue = { hex: '#00ff00' };
+
+    function go_back() {
+        var view = f7.views.current;
+        view.router.back(view.history[view.history.length - 2], {
+            force: true,
+        });
+    }
 </script>
 
 <Page name="home">
     <!-- blocco verde -->
 
-    <div class="container-green">
-        <img src="/freccio.png" id="freccia" alt="freccia" />
-        <h1 class="title">Illuminazione</h1>
-    </div>
+    <CustomNavbar title="Illuminazione"></CustomNavbar>
 
     <div style="margin-left: 8%;">
         <h2>Colore:</h2>

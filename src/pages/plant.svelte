@@ -9,6 +9,7 @@
         Icon,
         FabButtons,
         Button,
+        Link,
     } from "framework7-svelte";
     import {
         selected_plant_photo,
@@ -26,6 +27,7 @@
     import { page_panic } from "../lib/helper";
     import { AccountInfo } from "../lib/models/account_info";
     import { Plant } from "../lib/models/plant";
+    import CustomNavbar from "../components/CustomNavbar.svelte";
 
     function go_back() {
         var view = f7.views.current;
@@ -99,11 +101,7 @@
     <div class="rectangle" style="--image:url('{$selected_plant_photo}')">
         <div class="circle1" />
         <div class="circle2" />
-        <div class="freccia">
-            <a class="link" href="#0" on:click={() => go_back()}>
-                <img src="/freccio.png" alt="freccio" width="75%" />
-            </a>
-        </div>
+        <CustomNavbar title=""></CustomNavbar>
 
         <!-- searchbar cambiare colore-->
         <div class="search_bar">
@@ -135,7 +133,9 @@
                 <Button fill>Ordina semi</Button>
             </div>
             <div>
-                <Button fill>Coltiva</Button>
+                <!-- <Link href="/coltivation"> -->
+                    <Button href="/coltivation/" fill>Coltiva</Button>
+                <!-- </Link> -->
             </div>
         </div>
     </div>
@@ -148,15 +148,6 @@
         background-image: var(--image);
         /* background-repeat: no-repeat; */
         background-size: cover;
-    }
-
-    .freccia {
-        /* position: relative;
-        top: -300px; */
-        width: 10%;
-        height: 20%;
-        padding-left: 3%;
-        padding-top: 4%;
     }
 
     .search_bar {

@@ -1,5 +1,5 @@
 <script lang="ts">
-  import Navbar from "./Navbar.svelte";
+  import CustomNavbar from "../components/CustomNavbar.svelte";
 
   export let f7router;
 
@@ -58,7 +58,7 @@
 
 <Page name="home">
   <!-- navbar -->
-  <Navbar title="Esplora" search_bar_placeholder="Cerca una specie" />
+  <CustomNavbar title="Esplora" search_bar search_bar_placeholder="Cerca una specie" />
   <br />
   <List strongIos outlineIos dividersIos class="searchbar-not-found">
     <ListItem title="Nothing found" />
