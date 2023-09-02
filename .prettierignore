@@ -1,0 +1,18 @@
+.DS_Store
+node_modules
+/package
+.env
+.env.*
+!.env.example
+/android
+/public
+/resources
+
+# Ignore files for PNPM, NPM and YARN
+.git
+www
+.gitignore
+tsconfig.json
+package.json
+package-lock.json
+README.md

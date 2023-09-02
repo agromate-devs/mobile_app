@@ -1,103 +1,91 @@
 <script>
-    import {
-        Navbar,
-        Page,
-        BlockTitle,
-        Range,
-        List,
-        ListItem,
-        Icon,
-        ListButton,
-        ListInput,
-        Block,
-        f7
-    } from "framework7-svelte";
-    import CustomNavbar from "../components/CustomNavbar.svelte";
-    export let f7router;
+	import {
+		Navbar,
+		Page,
+		BlockTitle,
+		Range,
+		List,
+		ListItem,
+		Icon,
+		ListButton,
+		ListInput,
+		Block,
+		f7
+	} from 'framework7-svelte';
+	import CustomNavbar from '../components/CustomNavbar.svelte';
+	export let f7router;
 
-    let umidita = 0;
+	let umidita = 0;
 </script>
 
 <Page name="home">
-    <!-- blocco verde -->
+	<!-- blocco verde -->
 
-    <CustomNavbar title="Umidità"></CustomNavbar>
+	<CustomNavbar title="Umidità"></CustomNavbar>
 
-    <div style="margin-left: 8%;">
-        <h3>Umidità da mantenere in percentuale?</h3>
+	<div style="margin-left: 8%;">
+		<h3>Umidità da mantenere in percentuale?</h3>
 
-        <div class="slider">
-            <List simpleList strongIos outlineIos>
-                <ListItem>
-                    <div
-                        style="width: 100%; margin: 0 16px"
-                        class="display-flex flex-direction-row"
-                    >
-                        <Range
-                            min={0}
-                            max={100}
-                            step={1}
-                            bind:value={umidita}
-                            label={true}
-                            color="orange"
-                            style="margin: 0;"
-                        />
-                    </div>
-                </ListItem>
-            </List>
-        </div>
-        
-        <div>
-            <List>
-                <ListItem
-                    checkbox
-                    value="check_1"
-                    checked
-                    title="Notifiche in caso di umidità scarsa?"
-                />
-            </List>
-        </div>
+		<div class="slider">
+			<List simpleList strongIos outlineIos>
+				<ListItem>
+					<div style="width: 100%; margin: 0 16px" class="display-flex flex-direction-row">
+						<Range
+							min={0}
+							max={100}
+							step={1}
+							bind:value={umidita}
+							label={true}
+							color="orange"
+							style="margin: 0;"
+						/>
+					</div>
+				</ListItem>
+			</List>
+		</div>
 
-        <h3>Limite di umidità per notifica:</h3>
+		<div>
+			<List>
+				<ListItem checkbox value="check_1" checked title="Notifiche in caso di umidità scarsa?" />
+			</List>
+		</div>
 
-        <div class="slider">
-            <List simpleList strongIos outlineIos>
-                <ListItem>
-                    <div
-                        style="width: 100%; margin: 0 16px"
-                        class="display-flex flex-direction-row"
-                    >
-                        <Range
-                            min={0}
-                            max={100}
-                            step={1}
-                            bind:value={umidita}
-                            label={true}
-                            color="orange"
-                            style="margin: 0;"
-                        />
-                    </div>
-                </ListItem>
-            </List>
-        </div>
-    </div>
+		<h3>Limite di umidità per notifica:</h3>
 
-    <div>
-        <div style="display: flex; justify-content: center;">
-            <List>
-                <ListButton
-                    title="Conferma"
-                    style="background-color: #2DDA93; color: white; width: 150px; "
-                />
-            </List>
-        </div>
-    </div>
+		<div class="slider">
+			<List simpleList strongIos outlineIos>
+				<ListItem>
+					<div style="width: 100%; margin: 0 16px" class="display-flex flex-direction-row">
+						<Range
+							min={0}
+							max={100}
+							step={1}
+							bind:value={umidita}
+							label={true}
+							color="orange"
+							style="margin: 0;"
+						/>
+					</div>
+				</ListItem>
+			</List>
+		</div>
+	</div>
+
+	<div>
+		<div style="display: flex; justify-content: center;">
+			<List>
+				<ListButton
+					title="Conferma"
+					style="background-color: #2DDA93; color: white; width: 150px; "
+				/>
+			</List>
+		</div>
+	</div>
 </Page>
 
 <style>
-
-    .slider {
-        margin-top: -10%;
-        width: 90%;
-    }
+	.slider {
+		margin-top: -10%;
+		width: 90%;
+	}
 </style>

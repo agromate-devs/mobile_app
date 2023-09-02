@@ -1,25 +1,20 @@
 {
-  "cwd": "/home/andreock/work/AgroMate/mobile",
-  "type": [
-    "capacitor"
-  ],
-  "name": "AgroMate",
-  "framework": "svelte",
-  "template": "single-view",
-  "bundler": "vite",
-  "cssPreProcessor": false,
-  "theming": {
-    "customColor": true,
-    "color": "#00ff96",
-    "darkMode": true,
-    "iconFonts": true
-  },
-  "customBuild": false,
-  "pkg": "io.agromate.agromate",
-  "capacitor": {
-    "platforms": [
-      "ios",
-      "android"
-    ]
-  }
+	"cwd": "/home/andreock/work/AgroMate/mobile",
+	"type": ["capacitor"],
+	"name": "AgroMate",
+	"framework": "svelte",
+	"template": "single-view",
+	"bundler": "vite",
+	"cssPreProcessor": false,
+	"theming": {
+		"customColor": true,
+		"color": "#00ff96",
+		"darkMode": true,
+		"iconFonts": true
+	},
+	"customBuild": false,
+	"pkg": "io.agromate.agromate",
+	"capacitor": {
+		"platforms": ["ios", "android"]
+	}
 }
