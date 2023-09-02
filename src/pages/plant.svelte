@@ -135,7 +135,7 @@
                 <Button fill>Ordina semi</Button>
             </div>
             <div>
-                <Button fill>Coltiva</Button>
+                <Button fill href="/coltivation/">Coltiva</Button>
             </div>
         </div>
     </div>

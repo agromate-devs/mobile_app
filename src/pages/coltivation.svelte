@@ -6,22 +6,24 @@
 
     <!-- bottoni -->
 
-    <div class="container">
+    <Block>
 
         <div style="display: flex; flex-wrap: wrap; gap: 50px;">
-            <button class="button button-outline">Precipitazioni</button>
-            <button class="button button-outline">Umidità</button>
-            <button class="button button-outline">Ph del terreno</button>
-            <button class="button button-outline">Temperatura</button>
-            <button class="button button-outline">Illuminazione</button>
+            <Button href="/precipitazioni/" fill large>Precipitazioni</Button>
+            <Button href="/umidita/" fill large>Umidità</Button>
+            <!-- <Button  fill large>Ph del terreno</Button> -->
+            <Button href="/temperature/" fill large>Temperatura</Button>
+            <Button href="/illuminazione/" fill large>Illuminazione</Button>
         </div>
+        <br />
+        <br />
 
-        <div style="display: flex; gap: 50px">
-            <button class="button color-green" style= "with:150px; height: 50px; background-color: green; color: white; top: 120px;" >Conferma</button>
-            <button class="button color-red"   style= "with:150px; height: 50px; background-color: red; color: white; top: 120px;" >Annulla</button>
-        </div>
+        <div class="grid grid-cols-2 grid-gap">
+            <div><Button fill>Conferma</Button></div>
+            <div><Button color="red" fill>Annulla</Button></div>
+          </div>
 
-    </div>
+        </Block>
     
     
 </Page>
@@ -30,23 +32,4 @@
     import {Page,Block,Navbar,Button} from 'framework7-svelte';
     import CustomNavbar from '../components/CustomNavbar.svelte';
 </script>
-
-
-<style>
-    .container{
-        display: flex;
-        gap: 50px;
-        flex-wrap: wrap;
-        padding-left: 25px;
-        padding-top: 50px;
-    }
-    button{
-        width: 150px;
-        height: 100px;
-        font-size: 20px;
-    }
-    
-    
-
-</style>
 
