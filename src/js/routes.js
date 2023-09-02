@@ -103,7 +103,7 @@ var routes = [
     component: Illuminazione,
   },
   {
-    path: "/preceipitazioni/",
+    path: "/precipitazioni/",
     component: Precipitazioni,
   },
   {
