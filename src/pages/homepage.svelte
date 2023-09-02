@@ -33,6 +33,7 @@
     </div>
     <div class="profile_image">
       <img
+        class="profile_image_photo"
         src="/foto-profile.png"
         alt="foto-profile"
         width="70px"
@@ -68,7 +69,7 @@
           </div>
         </div>
       </Link>
-        <ButtonHome text="I tuoi dispositivi" img="/home-libro.png" />
+        <ButtonHome text="I tuoi dispositivi" img="/home-libro.png" href="/agrosmart_view/"/>
       </div>
     </div>
 
@@ -168,5 +169,8 @@
     width: 30%;
     filter: invert(0%) sepia(0%) saturate(0%) hue-rotate(251deg)
       brightness(1100%) contrast(103%);
+  }
+  .profile_image_photo {
+    border-radius: 100%;
   }
 </style>
