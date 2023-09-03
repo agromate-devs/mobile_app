@@ -16,3 +16,6 @@ tsconfig.json
 package.json
 package-lock.json
 README.md
+
+# Framework7 Fonts
+src/fonts
