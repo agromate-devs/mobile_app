@@ -13,7 +13,3 @@ export const PLANTS_DB_CONTEXT = writable(new DBContext());
 export const wifi_password = writable('');
 export const wifi_SSID = writable('');
 export const wifi_BSSID = writable('');
-
-
-
-

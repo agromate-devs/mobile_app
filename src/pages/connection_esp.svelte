@@ -1,44 +1,43 @@
 <script>
 	export let f7router;
-	import { Page, Button, f7} from 'framework7-svelte';
+	import { Page, Button, f7 } from 'framework7-svelte';
 	import { CapacitorWifi } from 'capacitorjs-plugin-wifi';
-	import { wifi_password, wifi_SSID, wifi_BSSID} from '../lib/store';
-
+	import { wifi_password, wifi_SSID, wifi_BSSID } from '../lib/store';
 
 	// let wifi = [];
-    let wifi = [
-        // Test dal browser
-        {
-            BSSID: 'aa:bb:cc:dd:ee:ff',
-            SSID: 'Test SSID',
-            capabilities: 'example',
-            centerFreq0: 80,
-            centerFreq1: 80,
-            frequency: 0,
-            level: 20,
-            timestamp: 20
-        },
-        {
-            BSSID: 'aa:bb:cc:dd:ee:ff',
-            SSID: 'Test bovo',
-            capabilities: 'example',
-            centerFreq0: 80,
-            centerFreq1: 80,
-            frequency: 0,
-            level: 20,
-            timestamp: 20
-        },
-        {
-            BSSID: 'aa:bb:cc:dd:ee:ff',
-            SSID: 'Test SSIDbovo',
-            capabilities: 'example',
-            centerFreq0: 80,
-            centerFreq1: 80,
-            frequency: 0,
-            level: 20,
-            timestamp: 20
-        }
-    ];
+	let wifi = [
+		// Test dal browser
+		{
+			BSSID: 'aa:bb:cc:dd:ee:ff',
+			SSID: 'Test SSID',
+			capabilities: 'example',
+			centerFreq0: 80,
+			centerFreq1: 80,
+			frequency: 0,
+			level: 20,
+			timestamp: 20
+		},
+		{
+			BSSID: 'aa:bb:cc:dd:ee:ff',
+			SSID: 'Test bovo',
+			capabilities: 'example',
+			centerFreq0: 80,
+			centerFreq1: 80,
+			frequency: 0,
+			level: 20,
+			timestamp: 20
+		},
+		{
+			BSSID: 'aa:bb:cc:dd:ee:ff',
+			SSID: 'Test SSIDbovo',
+			capabilities: 'example',
+			centerFreq0: 80,
+			centerFreq1: 80,
+			frequency: 0,
+			level: 20,
+			timestamp: 20
+		}
+	];
 
 	async function checkPermissionResult() {
 		let result = await CapacitorWifi.checkPermission();
@@ -55,15 +54,15 @@
 
 	// scanWifiResult();
 
-    function openPassword(i) {
-        f7.dialog.password('Enter your password', (password) => {
-            $wifi_password = password;
-            $wifi_SSID = wifi[i].SSID;
-            $wifi_BSSID = wifi[i].BSSID;
-            f7.dialog.alert(`Thank you!<br>Password:${password}`);
-            f7router.navigate('/wifi_loader/');
-        });
-    }
+	function openPassword(i) {
+		f7.dialog.password('Enter your password', (password) => {
+			$wifi_password = password;
+			$wifi_SSID = wifi[i].SSID;
+			$wifi_BSSID = wifi[i].BSSID;
+			f7.dialog.alert(`Thank you!<br>Password:${password}`);
+			f7router.navigate('/wifi_loader/');
+		});
+	}
 </script>
 
 <Page name="home">
@@ -73,7 +72,8 @@
 		<div class="circle1" />
 		<div class="circle2" />
 		<div class="freccia">
-			<a class="link" href="#0" on:click={() => f7router.navigate('/homepage/')}> <!-- bovo ci hai cagato? fa schifo -->
+			<a class="link" href="#0" on:click={() => f7router.navigate('/homepage/')}>
+				<!-- bovo ci hai cagato? fa schifo -->
 				<img src="/freccio.png" alt="freccio" width="75%" />
 			</a>
 		</div>
@@ -91,7 +91,7 @@
 				<h4>RSSI:</h4>
 				<h2>{net.SSID}</h2>
 				<div class="block2">
-					<img src="/agrosmart.png" alt="photo"/>
+					<img src="/agrosmart.png" alt="photo" />
 					<div class="block3">
 						<Button fill onClick={() => openPassword(i)}>Connetti</Button>
 					</div>
