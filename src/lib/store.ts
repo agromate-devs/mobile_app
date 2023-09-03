@@ -10,3 +10,10 @@ export const selected_plant_scientific_name = writable('');
 export const firebase_app: Writable<FirebaseApp> = writable();
 export const latest_wishlist_change_device_uuid = writable('');
 export const PLANTS_DB_CONTEXT = writable(new DBContext());
+export const wifi_password = writable('');
+export const wifi_SSID = writable('');
+export const wifi_BSSID = writable('');
+
+
+
+

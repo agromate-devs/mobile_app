@@ -15,7 +15,9 @@
     "format": "prettier --write  --plugin prettier-plugin-svelte .",
     "postinstall": "cpy --flat ./node_modules/framework7-icons/fonts/*.* ./src/fonts/ && cpy --flat ./node_modules/material-icons/iconfont/*.* ./src/fonts/ && npm run copysqlwasm"
   },
-  "pre-commit": ["format"],
+  "pre-commit": [
+    "format"
+  ],
   "browserslist": [
     "IOS >= 15",
     "Safari >= 15",
@@ -35,6 +37,7 @@
     "@capacitor/splash-screen": "^5.0.2",
     "@capacitor/status-bar": "^5.0.2",
     "@tsconfig/svelte": "^4.0.1",
+    "capacitor-plugin-esptouch": "^0.0.1",
     "capacitorjs-plugin-wifi": "^1.0.7",
     "copyfiles": "^2.4.1",
     "dom7": "^4.0.6",
