@@ -1,41 +1,34 @@
 {
   "project_info": {
-    "project_number": "461499325498",
-    "project_id": "apple-ecommerce-812fd",
-    "storage_bucket": "apple-ecommerce-812fd.appspot.com"
+    "project_number": "201155304709",
+    "project_id": "travelmates-382922",
+    "storage_bucket": "travelmates-382922.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:461499325498:android:2f29a77b468206f23c6903",
+        "mobilesdk_app_id": "1:201155304709:android:a0c534fd1481bafef56b6c",
         "android_client_info": {
           "package_name": "io.agromate.agromate"
         }
       },
       "oauth_client": [
         {
-          "client_id": "461499325498-u2hib76tohg2dl73f40tbv0n4d39qcul.apps.googleusercontent.com",
+          "client_id": "201155304709-4qsvhdms879luq2vo9tvfoc8i749bre4.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyBGEk6eEHv4Fg5VqBd69fYR0p66URJX6Dw"
+          "current_key": "AIzaSyDH9EKX6LbqGDonzTit7wgUz3oj09o2jvA"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "461499325498-u2hib76tohg2dl73f40tbv0n4d39qcul.apps.googleusercontent.com",
+              "client_id": "201155304709-4qsvhdms879luq2vo9tvfoc8i749bre4.apps.googleusercontent.com",
               "client_type": 3
-            },
-            {
-              "client_id": "461499325498-bvek8811e9bmhkh3pp712jpjmcdu1vc1.apps.googleusercontent.com",
-              "client_type": 2,
-              "ios_info": {
-                "bundle_id": "com.example.eCommerce"
-              }
             }
           ]
         }
