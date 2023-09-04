@@ -22,13 +22,13 @@
 
 		if (result.error == '{}') {
 			const new_device_post_result = await CapacitorHttp.post({
-				url:NEW_SENSOR_ENDPOINT.concat(`?user_id=${user.uid}&device_id=${sensor_uuid}`),
+				url: NEW_SENSOR_ENDPOINT.concat(`?user_id=${user.uid}&device_id=${sensor_uuid}`),
 				headers: {
-					"Authorization": user_jwt.token
+					Authorization: user_jwt.token
 				}
 			});
 
-			if (!(JSON.parse(new_device_post_result.data).status)) {
+			if (!JSON.parse(new_device_post_result.data).status) {
 				f7.dialog.alert('Connessione riuscita!', 'Successo', () => f7router.navigate('/homepage/'));
 			} else {
 				f7.dialog.alert('Errore durante la connessione al dispositivo', 'Errore');
