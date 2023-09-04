@@ -4,40 +4,7 @@
 	import { CapacitorWifi } from 'capacitorjs-plugin-wifi';
 	import { wifi_password, wifi_SSID, wifi_BSSID } from '../lib/store';
 
-	// let wifi = [];
-	let wifi = [
-		// Test dal browser
-		{
-			BSSID: 'aa:bb:cc:dd:ee:ff',
-			SSID: 'Test SSID',
-			capabilities: 'example',
-			centerFreq0: 80,
-			centerFreq1: 80,
-			frequency: 0,
-			level: 20,
-			timestamp: 20
-		},
-		{
-			BSSID: 'aa:bb:cc:dd:ee:ff',
-			SSID: 'Test bovo',
-			capabilities: 'example',
-			centerFreq0: 80,
-			centerFreq1: 80,
-			frequency: 0,
-			level: 20,
-			timestamp: 20
-		},
-		{
-			BSSID: 'aa:bb:cc:dd:ee:ff',
-			SSID: 'Test SSIDbovo',
-			capabilities: 'example',
-			centerFreq0: 80,
-			centerFreq1: 80,
-			frequency: 0,
-			level: 20,
-			timestamp: 20
-		}
-	];
+	let wifi = [];
 
 	async function checkPermissionResult() {
 		let result = await CapacitorWifi.checkPermission();
@@ -52,7 +19,7 @@
 		wifi = result.networks;
 	}
 
-	// scanWifiResult();
+	scanWifiResult();
 
 	function openPassword(i) {
 		f7.dialog.password('Enter your password', (password) => {
@@ -85,19 +52,22 @@
 	<!-- elenco esp -->
 
 	{#each wifi as net, i}
-		<div class="container-esp">
-			<div class="block1">
-				<h5>{net.level}</h5>
-				<h4>RSSI:</h4>
-				<h2>{net.SSID}</h2>
-				<div class="block2">
-					<img src="/agrosmart.png" alt="photo" />
-					<div class="block3">
-						<Button fill onClick={() => openPassword(i)}>Connetti</Button>
+		<!-- Check if wifi is 2.4 GHZ -->
+		{#if net.frequency > 2400 && net.frequency < 2485}
+			<div class="container-esp">
+				<div class="block1">
+					<h5>{net.level}</h5>
+					<h4>RSSI:</h4>
+					<h2>{net.SSID}</h2>
+					<div class="block2">
+						<img src="/agrosmart.png" alt="photo" />
+						<div class="block3">
+							<Button fill onClick={() => openPassword(i)}>Connetti</Button>
+						</div>
 					</div>
 				</div>
 			</div>
-		</div>
+		{/if}
 	{/each}
 </Page>
 
