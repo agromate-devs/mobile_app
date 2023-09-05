@@ -13,35 +13,36 @@
 	import PiantaCard from './PiantaCard.svelte';
 	import { get_plant_photo } from '/lib/wikipedia';
 	import PiantaItem from './PiantaItem.svelte';
-    import { onMount } from 'svelte';
-    import { getCurrentUser, get_current_user_jwt } from '../lib/firebase_auth';
+	import { onMount } from 'svelte';
+	import { getCurrentUser, get_current_user_jwt } from '../lib/firebase_auth';
 
 	let temperature = 0;
-    let piante = {"plant_name": "Maria"}
-    let jwt = "";
+	let piante = { plant_name: 'Maria' };
 
-onMount(async () => {
-        jwt = await get_current_user_jwt();
-    })
-
-    fetch("https://dlc52l1dnc.execute-api.eu-central-1.amazonaws.com/plant_info_api?user_id=uid&sensor_id=UUID"
-    ,{headers: new Headers({
-                authorization: jwt.token,
-                'content-type': 'application/x-www-form-urlencoded'
-            })}).then(response => response.json())  // converti a json
-    .then(json => piante = json) 
-    
-    
+	onMount(async () => {
+		let jwt = await get_current_user_jwt();
+		fetch(
+			'https://dlc52l1dnc.execute-api.eu-central-1.amazonaws.com/plant_info_api?user_id=uid&sensor_id=UUID',
+			{
+				headers: new Headers({
+					authorization: jwt.token,
+					'content-type': 'application/x-www-form-urlencoded'
+				})
+			}
+		)
+			.then((response) => response.json()) // converti a json
+			.then((json) => {
+				piante = json;
+			});
+	});
 </script>
 
 <Page name="home">
+	<CustomNavbar title="Le mie piante" />
 
-<CustomNavbar title="Le mie piante" />
-
-<List dividersIos simpleList>
-<PiantaItem name={piante.plant_name}/>
-</List>
-
+	<List dividersIos simpleList>
+		<PiantaItem name={piante.plant_name} />
+	</List>
 </Page>
 
 <style>
