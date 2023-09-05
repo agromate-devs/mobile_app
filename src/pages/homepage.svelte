@@ -51,7 +51,7 @@
 			<div class="grid grid-cols-3">
 				<ButtonHome text="Esplora" img="/home-fotocamera.png" href="/species/" />
 
-				<Link href="/species/">
+				<Link href="/myplant/">
 					<div class="rectangle">
 						<div class="center" style="padding-top: 10%;">
 							<img
