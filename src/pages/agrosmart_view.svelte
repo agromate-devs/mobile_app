@@ -7,7 +7,6 @@
 	import { get_current_user_jwt } from '../lib/firebase_auth.js';
 	import CustomNavbar from '../components/CustomNavbar.svelte';
 
-	
 	let info = [];
 
 	onMount(async () => {
@@ -17,21 +16,19 @@
 		}
 
 		let jwt = await get_current_user_jwt();
-        const res = await fetch(
-			"https://b8kc0x92yj.execute-api.eu-central-1.amazonaws.com/?user_id=user_test_id",
-            {
-                headers: new Headers({
-                    authorization: jwt.token,
-                    'content-type': 'application/x-www-form-urlencoded'
-                })
-            }
-        )
+		const res = await fetch(
+			'https://b8kc0x92yj.execute-api.eu-central-1.amazonaws.com/?user_id=user_test_id',
+			{
+				headers: new Headers({
+					authorization: jwt.token,
+					'content-type': 'application/x-www-form-urlencoded'
+				})
+			}
+		);
 		info = await res.json();
 
-		
 		console.log(info);
 	});
-	
 </script>
 
 <Page name="home">
@@ -62,7 +59,6 @@
 				update_available={false}
 			></Agrosmart>
 		{/each}
-		
 	</Block>
 
 	<Block>
