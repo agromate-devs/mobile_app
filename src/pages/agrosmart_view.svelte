@@ -4,13 +4,30 @@
 	import { Page, Block, Navbar, Button } from 'framework7-svelte';
 	import { onMount } from 'svelte';
 	import { getCurrentUser } from '../lib/firebase_auth.js';
+	import { get_current_user_jwt } from '../lib/firebase_auth.js';
 	import CustomNavbar from '../components/CustomNavbar.svelte';
+
+	let info = [];
 
 	onMount(async () => {
 		if ((await getCurrentUser()).email != null) {
 			// User is already logged in
 			f7router.navigate('/main/');
 		}
+
+		let jwt = await get_current_user_jwt();
+		const res = await fetch(
+			'https://b8kc0x92yj.execute-api.eu-central-1.amazonaws.com/?user_id=user_test_id',
+			{
+				headers: new Headers({
+					authorization: jwt.token,
+					'content-type': 'application/x-www-form-urlencoded'
+				})
+			}
+		);
+		info = await res.json();
+
+		console.log(info);
 	});
 </script>
 
@@ -34,12 +51,14 @@
 		</div>
 	</div>
 	<Block>
-		<Agrosmart
-			device_name="Agrosmart v1"
-			signal_level={86}
-			sw_version="1.2.0"
-			update_available={false}
-		></Agrosmart>
+		{#each info as net, i}
+			<Agrosmart
+				device_name="Agrosmart v1"
+				signal_level={86}
+				sw_version="1.2.0"
+				update_available={false}
+			></Agrosmart>
+		{/each}
 	</Block>
 
 	<Block>
