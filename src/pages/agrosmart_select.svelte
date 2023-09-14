@@ -33,9 +33,9 @@
 	<Block>
 		{#each info as net, i}
 			<div class="grid grid-cols-2">
-				<img src="agrosmart.png" alt="agrosmart">
+				<img src="agrosmart.png" alt="agrosmart" />
 				<div>
-					<h2>agrosmart v1 { i+1 }</h2>
+					<h2>agrosmart v1 {i + 1}</h2>
 					<Button fill>connect</Button>
 				</div>
 			</div>
