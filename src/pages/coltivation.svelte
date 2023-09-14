@@ -22,8 +22,12 @@
 		<br />
 
 		<div class="grid grid-cols-2 grid-gap">
-			<div><Button fill>Conferma</Button></div>
-			<div><Button color="red" fill>Annulla</Button></div>
+			<div>
+				<Button fill href="/agrosmart-select/">Conferma</Button>
+			</div>
+			<div>
+				<Button color="red" fill>Annulla</Button>
+			</div>
 		</div>
 	</Block>
 </Page>

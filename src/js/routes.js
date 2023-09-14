@@ -22,6 +22,7 @@ import LoginPage from '../pages/login.svelte';
 import RegistratiPage from '../pages/registrati.svelte';
 import PlantPage from '../pages/plant.svelte';
 import WishlistPage from '../pages/wishlist.svelte';
+import AgrosmartSelect from '../pages/agrosmart_select.svelte';
 import MyPlant from '../pages/myplant.svelte';
 
 var routes = [
@@ -112,6 +113,10 @@ var routes = [
 	{
 		path: '/wishlist/',
 		component: WishlistPage
+	},
+	{
+		path: '/agrosmart-select/',
+		component: AgrosmartSelect
 	},
 	{
 		path: '/myplant/',
