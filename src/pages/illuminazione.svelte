@@ -2,8 +2,7 @@
 	import { Page, Range, List, ListItem, Icon, ListButton, ListInput, f7 } from 'framework7-svelte';
 	import CustomNavbar from '../components/CustomNavbar.svelte';
 
-	let illuminazione = 0;
-	let wheePickerValue = { hex: '#00ff00' };
+	import { illuminazione, wheePickerValue, ora_inizio, ora_fine} from '../lib/store'
 
 	function go_back() {
 		var view = f7.views.current;
@@ -28,15 +27,15 @@
                 type="colorpicker"
                 placeholder="Color"
                 readonly
-                value={wheePickerValue}
-                onColorPickerChange={(value) => wheePickerValue = value}
+                value={$wheePickerValue}
+                onColorPickerChange={(value) => $wheePickerValue = value}
                 colorPickerParams={{
                     targetEl: '.wheel-picker-target',
                 }}
                 >
                 <i
                     slot="media"
-                    style={`background-color: ${wheePickerValue.hex}`}
+                    style={`background-color: ${$wheePickerValue.hex}`}
                     class="icon demo-list-icon wheel-picker-target"
                 />
                 </ListInput>
@@ -46,14 +45,12 @@
 		<h2>Tempo di esposizione:</h2>
 
 		<div class="grid grid-cols-2">
-			<div class="timer">
-				<h4>orario accensione</h4>
-				<input type="time" id="appt" name="appt" min="00:00" max="00:00" required />
-			</div>
-			<div class="timer">
-				<h4>tempo di accensione</h4>
-				<input type="time" id="appt" name="appt" min="00:00" max="00:00" required />
-			</div>
+			<ListInput label="Date time" type="datetime-local" placeholder="Please choose..." value={ $ora_inizio }>
+				<i class="icon demo-list-icon" slot="media" />
+			</ListInput>
+			<ListInput label="Date time" type="datetime-local" placeholder="Please choose..." value={ $ora_fine }>
+				<i class="icon demo-list-icon" slot="media" />
+			</ListInput>
 		</div>
 
 		<h2>Intensita:</h2>
@@ -69,12 +66,12 @@
 							min={0}
 							max={100}
 							step={1}
-							bind:value={illuminazione}
+							bind:value={$illuminazione}
 							label={true}
 							color="orange"
 							style="margin: 0;"
 						/>
-						<span style="position: relative; left: 15px; margin: 0;">{illuminazione}C</span>
+						<span style="position: relative; left: 15px; margin: 0;">{$gilluminazione}C</span>
 					</div>
 				</ListItem>
 			</List>

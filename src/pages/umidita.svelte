@@ -15,7 +15,8 @@
 	import CustomNavbar from '../components/CustomNavbar.svelte';
 	export let f7router;
 
-	let umidita = 0;
+	import { umidita, limit_umidita } from '../lib/store'
+
 </script>
 
 <Page name="home">
@@ -34,7 +35,7 @@
 							min={0}
 							max={100}
 							step={1}
-							bind:value={umidita}
+							bind:value={$umidita}
 							label={true}
 							color="orange"
 							style="margin: 0;"
@@ -60,7 +61,7 @@
 							min={0}
 							max={100}
 							step={1}
-							bind:value={umidita}
+							bind:value={$limit_umidita}
 							label={true}
 							color="orange"
 							style="margin: 0;"

@@ -11,7 +11,8 @@
 	} from 'framework7-svelte';
 	import CustomNavbar from '../components/CustomNavbar.svelte';
 
-	let temperature = 0;
+	import { temperature } from '../lib/store'
+
 </script>
 
 <Page name="home">
@@ -33,12 +34,12 @@
 						min={0}
 						max={100}
 						step={1}
-						bind:value={temperature}
+						bind:value={$temperature}
 						label={true}
 						color="orange"
 						style="margin: 0;"
 					/>
-					<span style="position: relative; left: 15px; margin: 0;">{temperature}C</span>
+					<span style="position: relative; left: 15px; margin: 0;">{$temperature}C</span>
 				</div>
 			</ListItem>
 		</List>

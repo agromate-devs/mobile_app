@@ -15,7 +15,7 @@
 	} from 'framework7-svelte';
 	import CustomNavbar from '../components/CustomNavbar.svelte';
 
-	let terreno_arido = false;
+	import { terreno_arido } from '../lib/store';
 </script>
 
 <Page name="home">
@@ -31,7 +31,7 @@
 					type="url"
 					placeholder="mm²"
 					clearButton
-					disabled={terreno_arido}
+					disabled={$terreno_arido}
 				/>
 			</List>
 		</div>
@@ -49,7 +49,7 @@
 				<ListItem
 					checkbox
 					value="check_2"
-					bind:checked={terreno_arido}
+					bind:checked={$terreno_arido}
 					title="Innaffia quando il terreno è arrido?"
 				/>
 			</List>
