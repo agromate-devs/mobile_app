@@ -15,8 +15,7 @@
 	import CustomNavbar from '../components/CustomNavbar.svelte';
 	export let f7router;
 
-	import { umidita, limit_umidita } from '../lib/store'
-
+	import { umidita, limit_umidita } from '../lib/store';
 </script>
 
 <Page name="home">

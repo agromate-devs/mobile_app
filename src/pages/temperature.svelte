@@ -11,8 +11,7 @@
 	} from 'framework7-svelte';
 	import CustomNavbar from '../components/CustomNavbar.svelte';
 
-	import { temperature } from '../lib/store'
-
+	import { temperature } from '../lib/store';
 </script>
 
 <Page name="home">

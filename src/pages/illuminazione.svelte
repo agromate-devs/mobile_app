@@ -2,7 +2,7 @@
 	import { Page, Range, List, ListItem, Icon, ListButton, ListInput, f7 } from 'framework7-svelte';
 	import CustomNavbar from '../components/CustomNavbar.svelte';
 
-	import { illuminazione, wheePickerValue, ora_inizio, ora_fine} from '../lib/store'
+	import { illuminazione, wheePickerValue, ora_inizio, ora_fine } from '../lib/store';
 
 	function go_back() {
 		var view = f7.views.current;
@@ -45,10 +45,20 @@
 		<h2>Tempo di esposizione:</h2>
 
 		<div class="grid grid-cols-2">
-			<ListInput label="Date time" type="datetime-local" placeholder="Please choose..." value={ $ora_inizio }>
+			<ListInput
+				label="Date time"
+				type="datetime-local"
+				placeholder="Please choose..."
+				value={$ora_inizio}
+			>
 				<i class="icon demo-list-icon" slot="media" />
 			</ListInput>
-			<ListInput label="Date time" type="datetime-local" placeholder="Please choose..." value={ $ora_fine }>
+			<ListInput
+				label="Date time"
+				type="datetime-local"
+				placeholder="Please choose..."
+				value={$ora_fine}
+			>
 				<i class="icon demo-list-icon" slot="media" />
 			</ListInput>
 		</div>
