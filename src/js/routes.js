@@ -16,7 +16,6 @@ import Temperature from '../pages/temperature.svelte';
 import Illuminazione from '../pages/illuminazione.svelte';
 import Precipitazioni from '../pages/precipitazioni.svelte';
 import Umidita from '../pages/umidita.svelte';
-
 import NotFoundPage from '../pages/404.svelte';
 import LoginPage from '../pages/login.svelte';
 import RegistratiPage from '../pages/registrati.svelte';
@@ -24,6 +23,7 @@ import PlantPage from '../pages/plant.svelte';
 import WishlistPage from '../pages/wishlist.svelte';
 import AgrosmartSelect from '../pages/agrosmart_select.svelte';
 import MyPlant from '../pages/myplant.svelte';
+import NotificationTest from '../pages/notification_test.svelte';
 
 var routes = [
 	{
@@ -121,6 +121,10 @@ var routes = [
 	{
 		path: '/myplant/',
 		component: MyPlant
+	},
+	{
+		path: '/notification_test/',
+		component: NotificationTest
 	},
 	{
 		path: '(.*)',

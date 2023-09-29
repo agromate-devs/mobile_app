@@ -5,7 +5,7 @@
 
 	export let f7router;
 
-	import { Page, Block, Searchbar, Link } from 'framework7-svelte';
+	import { Page, Block, Searchbar, Link, Button } from 'framework7-svelte';
 	import { onMount } from 'svelte';
 	import { getCurrentUser, is_user_logged } from '../lib/firebase_auth.js';
 	import { current_page } from '../lib/store';
@@ -74,6 +74,12 @@
 			<PiantaCard text="Basilico" img="/homepage-card-basilico.png" />
 		</Block>
 	</Block>
+
+
+		<!-- {#if import.meta.env.MODE == 'development' && user != '' && user != null} -->
+			<Button href="/notification_test/" fill>Notification Test</Button>
+			<br />
+		<!-- {/if}	 -->
 </Page>
 
 <style>
