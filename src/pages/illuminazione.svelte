@@ -81,7 +81,7 @@
 							color="orange"
 							style="margin: 0;"
 						/>
-						<span style="position: relative; left: 15px; margin: 0;">{$gilluminazione}C</span>
+						<span style="position: relative; left: 15px; margin: 0;">{$illuminazione}C</span>
 					</div>
 				</ListItem>
 			</List>

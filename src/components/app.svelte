@@ -83,7 +83,7 @@
 					iconMd="f7:star"
 					on:click={() => change_tab('/wishlist/', 'tab-2')}
 				/>
-				<Link tabLink="#tab-3" text="Profilo" iconIos="f7:person" iconMd="material:person" />
+				<Link tabLink="#tab-3" text="Profilo" iconIos="f7:person" iconMd="material:person" on:click={() => change_tab('/profile/', 'tab-3')} />
 			</Toolbar>
 		{/if}
 	</View>

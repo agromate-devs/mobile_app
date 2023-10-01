@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { Page, Block, Button } from 'framework7-svelte';
+	import { Page, Block, Button, List, ListItem } from 'framework7-svelte';
 	export let f7router;
 	export let f7route;
 
@@ -75,35 +75,39 @@
 
 <Page name="home">
 	<Block>
-		{#each plants as plant}
-			{#if plant.commonName != ''}
-				<!-- piantine -->
-				<div
-					on:click={() => select_plant(plant.commonName, plant.scientificNameX)}
-					on:keypress={() => {}}
-				>
-					<PiantaItem
-						temp={plant.temperatureMinimumF == '' ? '?' : plant.temperatureMinimumF}
-						ph={ph_media(plant.pHMinimum, plant.pHMaximum)}
-						days={growth_rate_to_about_days(plant.growthRate)}
-						name={capitalize(plant.commonName)}
-					/>
-				</div>
-			{:else}
-				<div
-					on:click={() => select_plant(plant.scientificNameX, plant.scientificNameX)}
-					on:keypress={() => {}}
-				>
-					<!-- piantine -->
-					<PiantaItem
-						temp={plant.temperatureMinimumF == '' ? '?' : plant.temperatureMinimumF}
-						ph={ph_media(plant.pHMinimum, plant.pHMaximium)}
-						days={growth_rate_to_about_days(plant.growthRate)}
-						name={plant.scientificNameX}
-					/>
-				</div>
-			{/if}
-		{/each}
+		<List>
+			{#each plants as plant}
+				<ListItem swipeout>
+					{#if plant.commonName != ''}
+						<!-- piantine -->
+						<div
+							on:click={() => select_plant(plant.commonName, plant.scientificNameX)}
+							on:keypress={() => {}}
+						>
+							<PiantaItem
+								temp={plant.temperatureMinimumF == '' ? '?' : plant.temperatureMinimumF}
+								ph={ph_media(plant.pHMinimum, plant.pHMaximum)}
+								days={growth_rate_to_about_days(plant.growthRate)}
+								name={capitalize(plant.commonName)}
+							/>
+						</div>
+					{:else}
+						<div
+							on:click={() => select_plant(plant.scientificNameX, plant.scientificNameX)}
+							on:keypress={() => {}}
+						>
+							<!-- piantine -->
+							<PiantaItem
+								temp={plant.temperatureMinimumF == '' ? '?' : plant.temperatureMinimumF}
+								ph={ph_media(plant.pHMinimum, plant.pHMaximium)}
+								days={growth_rate_to_about_days(plant.growthRate)}
+								name={plant.scientificNameX}
+							/>
+						</div>
+					{/if}
+				</ListItem>
+			{/each}
+		</List>
 	</Block>
 </Page>
 

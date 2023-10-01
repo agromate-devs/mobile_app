@@ -4,12 +4,11 @@
 	import { Page, Block, Navbar, Button } from 'framework7-svelte';
 	import { onMount } from 'svelte';
 	import { getCurrentUser } from '../lib/firebase_auth.js';
-	import CustomNavbar from '../components/CustomNavbar.svelte';
 
+	let user = '';
 	onMount(async () => {
 		if ((await getCurrentUser()).email != null) {
-			// User is already logged in
-			f7router.navigate('/homepage/');
+			user = (await getCurrentUser()).displayName;
 		}
 	});
 </script>
@@ -18,11 +17,12 @@
 	<div class="rectangle">
 		<div class="circle1"></div>
 		<div class="circle2"></div>
-		<CustomNavbar title=""></CustomNavbar>
+		<br />
+		<br />
 		<div class="center">
-			<img src="/foto_profile.png" alt="foto_profile" width="120" height="120" />
+			<img src="/foto-profile.png" alt="foto_profile" width="120" height="120" />
 			<div style="color:#ffffff;">
-				<h1>Ciro Esposito</h1>
+				<h1>{user}</h1>
 				<h4 class="subtitle">
 					<img src="/segnaposto.png" alt="segnaposto" width="15" height="15" /> 200 piante piantate
 				</h4>
@@ -31,7 +31,7 @@
 	</div>
 	<Block>
 		<!-- piantine -->
-		<div class="grid grid-cols-2">
+		<!-- <div class="grid grid-cols-2">
 			<img src="/cacatus_rosso.png" alt="cacatus_rosso" width="140" height="140" />
 			<div>
 				<h2>Basilico</h2>
@@ -52,7 +52,6 @@
 			</div>
 		</div>
 
-		<!-- piantine -->
 		<div class="grid grid-cols-2">
 			<img src="/cacatus_rosso.png" alt="cacatus_rosso" width="140" height="140" />
 			<div>
@@ -72,7 +71,7 @@
 					<h5 class="infobox">25</h5>
 				</div>
 			</div>
-		</div>
+		</div> -->
 	</Block>
 </Page>
 
