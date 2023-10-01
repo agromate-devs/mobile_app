@@ -15,7 +15,7 @@
 	} from 'framework7-svelte';
 	import CustomNavbar from '../components/CustomNavbar.svelte';
 
-	import { terreno_arido } from '../lib/store';
+	import { terreno_arido, precipitazioni } from '../lib/store';
 </script>
 
 <Page name="home">
@@ -31,6 +31,7 @@
 					type="url"
 					placeholder="mm²"
 					clearButton
+					bind:value={$precipitazioni}
 					disabled={$terreno_arido}
 				/>
 			</List>

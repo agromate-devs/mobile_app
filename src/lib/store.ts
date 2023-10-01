@@ -21,4 +21,5 @@ export let illuminazione = writable('');
 export let wheePickerValue = writable({ hex: '#00ff00' });
 export let ora_inizio = writable('');
 export let ora_fine = writable('');
-export let terreno_arido = writable();
+export let precipitazioni = writable(0);
+export let terreno_arido = writable(false);
