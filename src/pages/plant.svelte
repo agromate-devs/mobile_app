@@ -65,7 +65,10 @@
 			$latest_wishlist_change_device_uuid = device_uuid;
 			document.latest_wishlist_change_device_uuid = device_uuid;
 
-			let wishlist_from_store: Plant[] = JSON.parse(localStorage.getItem('wishlist_plants'));
+			let wishlist_from_store: Plant[] =
+				JSON.parse(localStorage.getItem('wishlist_plants')) == null
+					? []
+					: JSON.parse(localStorage.getItem('wishlist_plants'));
 			wishlist_from_store.push({
 				name: $selected_plant_name,
 				uuid: plant_uuid
