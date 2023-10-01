@@ -16,6 +16,7 @@ import Temperature from '../pages/temperature.svelte';
 import Illuminazione from '../pages/illuminazione.svelte';
 import Precipitazioni from '../pages/precipitazioni.svelte';
 import Umidita from '../pages/umidita.svelte';
+import Chart from '../pages/chart.svelte';
 
 import NotFoundPage from '../pages/404.svelte';
 import LoginPage from '../pages/login.svelte';
@@ -121,6 +122,10 @@ var routes = [
 	{
 		path: '/myplant/',
 		component: MyPlant
+	},
+	{
+		path: '/chart/',
+		component: Chart
 	},
 	{
 		path: '(.*)',
