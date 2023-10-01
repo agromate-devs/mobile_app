@@ -8,11 +8,11 @@
 	import CustomNavbar from '../components/CustomNavbar.svelte';
 
 	let info = [];
+	let user = '';
 
 	onMount(async () => {
 		if ((await getCurrentUser()).email != null) {
-			// User is already logged in
-			f7router.navigate('/main/');
+			user = (await getCurrentUser()).displayName;
 		}
 
 		let jwt = await get_current_user_jwt();
@@ -43,7 +43,7 @@
 		<div class="center">
 			<img src="/foto-profile.png" alt="foto_profile" width="120" height="120" />
 			<div style="color:#ffffff;">
-				<h1>Ciro Esposito</h1>
+				<h1>{user}</h1>
 				<h4 class="subtitle">
 					<img src="/segnaposto.png" alt="segnaposto" width="15" height="15" /> 200 piante piantate
 				</h4>
