@@ -21,19 +21,10 @@
 		LineElement,
 		LinearScale,
 		PointElement,
-		CategoryScale,
+		CategoryScale
 	} from 'chart.js';
 
-	Chart.register(
-		Title,
-		Tooltip,
-		Legend,
-		LineElement,
-		LinearScale,
-		PointElement,
-		CategoryScale
-	);
-
+	Chart.register(Title, Tooltip, Legend, LineElement, LinearScale, PointElement, CategoryScale);
 
 	let chartRef;
 	let chartRef2;
@@ -43,36 +34,40 @@
 	let dataseat = [4, 2, 3];
 	let dataseat2 = [4, 2, 3];
 
-	setInterval(async function() {
-		if(chartRef != null){
-		chartRef.update();
+	setInterval(async function () {
+		if (chartRef != null) {
+			chartRef.update();
 		}
-		if(chartRef2 != null){
-		chartRef2.update();
+		if (chartRef2 != null) {
+			chartRef2.update();
 		}
 	}, 5000);
 
 	export const data = {
 		labels: timestamp,
-		datasets: [{
-			data: dataseat,
-		}],
+		datasets: [
+			{
+				data: dataseat
+			}
+		]
 	};
 
 	export const data2 = {
 		labels: timestamp2,
-		datasets: [{
-			data: dataseat2,
-		}],
+		datasets: [
+			{
+				data: dataseat2
+			}
+		]
 	};
 </script>
 
 <Page name="home">
 	<CustomNavbar title="Le mie piante" />
 
-	<Line {data}bind:chart={chartRef} options={{ responsive: true }}/>
+	<Line {data} bind:chart={chartRef} options={{ responsive: true }} />
 
-	<Line {data2}bind:chart={chartRef2} options={{ responsive: true }}/>
+	<Line {data2} bind:chart={chartRef2} options={{ responsive: true }} />
 </Page>
 
 <style>
