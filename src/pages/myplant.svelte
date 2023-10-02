@@ -1,4 +1,7 @@
 <script>
+	export let f7router;
+	export let f7route;
+
 	import { Page, List } from 'framework7-svelte';
 	import CustomNavbar from '../components/CustomNavbar.svelte';
 	import PiantaItem from './PiantaItem.svelte';
@@ -27,10 +30,11 @@
 
 		const jwt = await get_current_user_jwt();
 		const user = await getCurrentUser();
+
 		fetch(
 			'https://dlc52l1dnc.execute-api.eu-central-1.amazonaws.com/plant_info_api?user_id='.concat(
 				user.uid
-			),
+			).concat("&sensor_id=NULL"),
 			{
 				headers: new Headers({
 					authorization: jwt.token,
@@ -51,8 +55,15 @@
 
 	<List dividersIos simpleList>
 		{#each piante as pianta}
-			<!-- Cambiare in temperatura dal sensore e aggiungere gli altri parametri -->
-			<PiantaItem name={pianta.plant_name} temp={pianta.default_temperature} />
+			<div on:click={() => f7router.navigate('/chart/')} on:keydown={() => {}}>
+				<!-- Cambiare in temperatura dal sensore e aggiungere gli altri parametri -->
+				<PiantaItem
+					name={pianta.plant_name}
+					temp={pianta.default_temperature}
+					days={pianta.days}
+					ph={pianta.default_humidity}
+				/>
+			</div>
 		{/each}
 	</List>
 </Page>

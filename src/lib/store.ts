@@ -13,9 +13,10 @@ export const PLANTS_DB_CONTEXT = writable(new DBContext());
 export const wifi_password = writable('');
 export const wifi_SSID = writable('');
 export const wifi_BSSID = writable('');
+export const device_uuid = writable('');
 
 export let umidita = writable('');
-export let limit_umidita = writable('');
+export let limit_umidita = writable(false);
 export let temperature = writable('');
 export let illuminazione = writable('');
 export let wheePickerValue = writable({ hex: '#00ff00' });
