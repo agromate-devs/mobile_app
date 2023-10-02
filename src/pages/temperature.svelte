@@ -52,17 +52,6 @@
 			</List>
 		</div>
 	</div>
-
-	<div>
-		<div style="display: flex; justify-content: center;">
-			<List>
-				<ListButton
-					title="Conferma"
-					style="background-color: #2DDA93; color: white; width: 150px; "
-				/>
-			</List>
-		</div>
-	</div>
 </Page>
 
 <style>

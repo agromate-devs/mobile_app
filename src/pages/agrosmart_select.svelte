@@ -85,6 +85,9 @@
 	});
 
 	async function assign_plant(device_id) {
+		f7.dialog.alert("Pianta aggiunta correttamente all'agrosmart!", () => {
+			f7router.navigate('/homepage/');
+		});
 		const user = await getCurrentUser();
 		const jwt = await get_current_user_jwt();
 		const request_body = JSON.stringify({

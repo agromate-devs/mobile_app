@@ -56,14 +56,6 @@
 			</List>
 		</div>
 	</div>
-
-	<div>
-		<div style="display: flex; justify-content: center;">
-			<List>
-				<Button fill large>Conferma</Button>
-			</List>
-		</div>
-	</div>
 </Page>
 
 <style>

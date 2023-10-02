@@ -46,37 +46,11 @@
 
 		<div>
 			<List>
-				<ListItem checkbox value="check_1" checked title="Notifiche in caso di umidità scarsa?" />
-			</List>
-		</div>
-
-		<h3>Limite di umidità per notifica:</h3>
-
-		<div class="slider">
-			<List simpleList strongIos outlineIos>
-				<ListItem>
-					<div style="width: 100%; margin: 0 16px" class="display-flex flex-direction-row">
-						<Range
-							min={0}
-							max={100}
-							step={1}
-							bind:value={$limit_umidita}
-							label={true}
-							color="orange"
-							style="margin: 0;"
-						/>
-					</div>
-				</ListItem>
-			</List>
-		</div>
-	</div>
-
-	<div>
-		<div style="display: flex; justify-content: center;">
-			<List>
-				<ListButton
-					title="Conferma"
-					style="background-color: #2DDA93; color: white; width: 150px; "
+				<ListItem
+					checkbox
+					value="check_1"
+					bind:checked={$limit_umidita}
+					title="Notifiche in caso di umidità errata?"
 				/>
 			</List>
 		</div>
