@@ -81,8 +81,8 @@
 	let data = {};
 
 	onMount(async () => {
-		const response = await fetch(SENSORS_API.concat("297a0620-3b4d-40ed-b407-2216eb0d"));
-		const datas = (await response.json()).slice(30, 40);	// Take first 10 elements
+		const response = await fetch(SENSORS_API.concat('297a0620-3b4d-40ed-b407-2216eb0d'));
+		const datas = (await response.json()).slice(30, 40); // Take first 10 elements
 		data = {
 			labels: datas.map((item) => unix_timestamp_to_parsed_date(item.timestamp)),
 			datasets: [
@@ -159,7 +159,7 @@
 <Page name="home">
 	<CustomNavbar title="Le mie piante" />
 
-	<Line bind:data={data} bind:chart={chartRef} options={{ responsive: true }} />
+	<Line bind:data bind:chart={chartRef} options={{ responsive: true }} />
 
 	<!-- <Line {data2} bind:chart={chartRef2} options={{ responsive: true }} /> -->
 </Page>

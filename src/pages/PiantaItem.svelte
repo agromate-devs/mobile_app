@@ -19,7 +19,7 @@
 			<Preloader color="multi" />
 		</div>
 	{:else}
-		<img src={img} alt={name} width="140" height="140" />
+		<img src={img} alt={name} width="140" height="140" style="margin-left: 1em; margin-top: 1em" />
 	{/if}
 
 	<div>
@@ -30,7 +30,7 @@
 				<h5 class="infobox">{temp}</h5>
 			</div>
 			<div>
-				<h5 class="infobox" style="color:gray">pH medio</h5>
+				<h5 class="infobox" style="color:gray">Umidità media</h5>
 				<h5 class="infobox">{ph}%</h5>
 			</div>
 		</div>

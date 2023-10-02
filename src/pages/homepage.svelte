@@ -75,11 +75,10 @@
 		</Block>
 	</Block>
 
-
-		<!-- {#if import.meta.env.MODE == 'development' && user != '' && user != null} -->
-			<Button href="/notification_test/" fill>Notification Test</Button>
-			<br />
-		<!-- {/if}	 -->
+	<!-- {#if import.meta.env.MODE == 'development' && user != '' && user != null} -->
+	<!-- <Button href="/notification_test/" fill>Notification Test</Button>
+	<br /> -->
+	<!-- {/if}	 -->
 </Page>
 
 <style>

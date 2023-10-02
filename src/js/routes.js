@@ -25,7 +25,6 @@ import PlantPage from '../pages/plant.svelte';
 import WishlistPage from '../pages/wishlist.svelte';
 import AgrosmartSelect from '../pages/agrosmart_select.svelte';
 import MyPlant from '../pages/myplant.svelte';
-import NotificationTest from '../pages/notification_test.svelte';
 
 var routes = [
 	{
