@@ -41,7 +41,6 @@
 				'content-type': 'application/x-www-form-urlencoded'
 			}),
 			body: JSON.stringify({
-				uid: user.uid,
 				list_id: DEFAULT_LIST_ID,
 				plant: {
 					name: $selected_plant_name,

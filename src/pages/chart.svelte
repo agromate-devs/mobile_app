@@ -25,6 +25,7 @@
 	} from 'chart.js';
 	import { onMount } from 'svelte';
 	import { device_uuid } from '../lib/store';
+	import { get_current_user_jwt } from '../lib/firebase_auth';
 	Chart.register(Title, Tooltip, Legend, LineElement, LinearScale, PointElement, CategoryScale);
 
 	let chartRef;
@@ -81,7 +82,12 @@
 	let data = {};
 
 	onMount(async () => {
-		const response = await fetch(SENSORS_API.concat('297a0620-3b4d-40ed-b407-2216eb0d'));
+		let jwt = await get_current_user_jwt();
+		const response = await fetch(SENSORS_API.concat('297a0620-3b4d-40ed-b407-2216eb0d'), {
+			headers: new Headers({
+				authorization: jwt.token
+			})
+		});
 		const datas = (await response.json()).slice(30, 40); // Take first 10 elements
 		data = {
 			labels: datas.map((item) => unix_timestamp_to_parsed_date(item.timestamp)),

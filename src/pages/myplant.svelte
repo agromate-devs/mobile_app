@@ -30,11 +30,8 @@
 
 		const jwt = await get_current_user_jwt();
 		const user = await getCurrentUser();
-
 		fetch(
-			'https://dlc52l1dnc.execute-api.eu-central-1.amazonaws.com/plant_info_api?user_id='
-				.concat(user.uid)
-				.concat('&sensor_id=NULL'),
+			'https://dlc52l1dnc.execute-api.eu-central-1.amazonaws.com/plant_info_api?sensor_id=NULL',
 			{
 				headers: new Headers({
 					authorization: jwt.token,

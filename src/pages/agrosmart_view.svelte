@@ -17,7 +17,7 @@
 
 		let jwt = await get_current_user_jwt();
 		const res = await fetch(
-			'https://b8kc0x92yj.execute-api.eu-central-1.amazonaws.com/?user_id=user_test_id',
+			'https://b8kc0x92yj.execute-api.eu-central-1.amazonaws.com',
 			{
 				headers: new Headers({
 					authorization: jwt.token,

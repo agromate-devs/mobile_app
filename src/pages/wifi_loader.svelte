@@ -22,7 +22,7 @@
 
 		if (result.error == '{}') {
 			const new_device_post_result = await CapacitorHttp.post({
-				url: NEW_SENSOR_ENDPOINT.concat(`?user_id=${user.uid}&device_id=${sensor_uuid}`),
+				url: NEW_SENSOR_ENDPOINT.concat(`device_id=${sensor_uuid}`),
 				headers: {
 					Authorization: user_jwt.token
 				}

@@ -41,7 +41,7 @@
 			let user = await getCurrentUser();
 			let jwt = await get_current_user_jwt();
 			plants_raw = await (
-				await fetch(WISHLIST_API_ENDPOINT + '?uid=' + user.uid, {
+				await fetch(WISHLIST_API_ENDPOINT, {
 					method: 'GET',
 					headers: new Headers({
 						authorization: jwt.token,

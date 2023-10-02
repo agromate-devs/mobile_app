@@ -20,7 +20,7 @@
 
 	let info = [];
 
-	const DEVICE_API_ENDPOINT = 'https://b8kc0x92yj.execute-api.eu-central-1.amazonaws.com/?user_id=';
+	const DEVICE_API_ENDPOINT = 'https://b8kc0x92yj.execute-api.eu-central-1.amazonaws.com';
 	const PLANT_INFO_API = 'https://dlc52l1dnc.execute-api.eu-central-1.amazonaws.com';
 	let device_token = '';
 
@@ -75,7 +75,7 @@
 		const jwt = await get_current_user_jwt();
 		console.log(jwt);
 
-		const res = await fetch(DEVICE_API_ENDPOINT.concat(user.uid), {
+		const res = await fetch(DEVICE_API_ENDPOINT, {
 			headers: new Headers({
 				authorization: jwt.token,
 				'content-type': 'application/x-www-form-urlencoded'
@@ -91,7 +91,6 @@
 		const user = await getCurrentUser();
 		const jwt = await get_current_user_jwt();
 		const request_body = JSON.stringify({
-			user_id: user.uid,
 			plant_name: $selected_plant_name,
 			sensor_id: device_id,
 			device_token: device_token,
