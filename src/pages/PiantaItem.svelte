@@ -19,7 +19,7 @@
 			<Preloader color="multi" />
 		</div>
 	{:else}
-		<img src={img} alt={name} width="140" height="140" style="margin-left: 1em; margin-top: 1em" />
+		<img src={img} alt={name} width="140" height="140" />
 	{/if}
 
 	<div>
