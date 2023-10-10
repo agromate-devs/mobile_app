@@ -2,7 +2,7 @@
 	export let f7router;
 	export let f7route;
 
-	import { Page, List } from 'framework7-svelte';
+	import { Page, List, Block } from 'framework7-svelte';
 	import CustomNavbar from '../components/CustomNavbar.svelte';
 	import PiantaItem from './PiantaItem.svelte';
 	import { onMount } from 'svelte';
@@ -50,7 +50,8 @@
 <Page name="home">
 	<CustomNavbar title="Le mie piante" />
 
-	<List dividersIos simpleList>
+	<!-- <List dividersIos simpleList style="margin-left: 1em;"> -->
+	<Block>
 		{#each piante as pianta}
 			<div on:click={() => f7router.navigate('/chart/')} on:keydown={() => {}}>
 				<!-- Cambiare in temperatura dal sensore e aggiungere gli altri parametri -->
@@ -62,5 +63,7 @@
 				/>
 			</div>
 		{/each}
-	</List>
+	</Block>
+
+	<!-- </List> -->
 </Page>
