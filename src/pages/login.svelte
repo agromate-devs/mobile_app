@@ -16,6 +16,8 @@
 
 	import LoginWithGoogle from '../components/login_with_google.svelte';
 	import { FirebaseAuthentication } from '@capacitor-firebase/authentication';
+	import { GoogleAuthProvider, getAuth, signInWithCredential } from 'firebase/auth';
+
 	import { getFirestore, setDoc } from 'firebase/firestore';
 	import { doc, getDoc } from 'firebase/firestore';
 	import { firebase_app, latest_wishlist_change_device_uuid } from '../lib/store';
@@ -69,6 +71,21 @@
 			f7.dialog.alert('Account non esistente, controlla la password o la email.');
 		}
 	}
+
+	async function reset_pwd() {
+		f7.dialog.prompt('Enter your email', (email) => {
+			f7.dialog.confirm(`Are you sure that your email is ${email}?`);
+		});
+
+		FirebaseAuthentication.sendPasswordResetEmail({ email: email });
+	}
+
+	async function signInWithGoogle() {
+		const result = await FirebaseAuthentication.signInWithGoogle();
+		const credential = GoogleAuthProvider.credential(result.credential?.idToken);
+		const auth = getAuth();
+		await signInWithCredential(auth, credential);
+	}
 </script>
 
 <Page>
@@ -106,14 +123,14 @@
 			<!-- <i class="icon demo-list-icon" slot="media" /> -->
 		</ListInput>
 		<div class="float-right">
-			<ListItem title="Password dimenticata?" />
+			<ListItem on:click={reset_pwd} title="Password dimenticata?" />
 		</div>
 	</List>
 	<br />
 
 	<Block>
 		<div class="display-flex justify-content-center">
-			<LoginWithGoogle />
+			<LoginWithGoogle on:click={signInWithGoogle} />
 		</div>
 	</Block>
 
