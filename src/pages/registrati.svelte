@@ -93,10 +93,7 @@
 		</ListInput>
 	</List>
 	<Block>
-		<Button on:click={registrati} fill>Accedi</Button>
-		<p class="text-align-center">
-			Non hai un account? <span class="green_span">Registrati</span>
-		</p>
+		<Button on:click={registrati} fill>Registrati</Button>
 	</Block>
 </Page>
 
