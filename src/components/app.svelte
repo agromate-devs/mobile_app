@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
 	import { getDevice } from 'framework7/lite-bundle';
-	import { f7, f7ready, App, View, Toolbar, Link, Tab, Tabs } from 'framework7-svelte';
+	import { f7, f7ready, App, View, Toolbar, Link } from 'framework7-svelte';
 	import { initializeApp } from 'firebase/app';
 	import { firebaseConfig } from '../lib/firebase_config.js';
 	import capacitorApp from '../js/capacitor-app';
@@ -34,9 +34,6 @@
 			androidOverlaysWebView: false
 		}
 	};
-	// Login screen demo data
-	let username = '';
-	let password = '';
 
 	onMount(() => {
 		f7ready(() => {
@@ -48,12 +45,14 @@
 		});
 	});
 	function change_tab(new_page, tapped_tab: string) {
-		console.log(tapped_tab);
 		const active_elements = document.getElementsByClassName('tab-link-active');
 		const tapped_element = document.getElementById(tapped_tab);
 		if (tapped_element != null) {
-			for (let i = 0; i < active_elements.length; i++) {
-				active_elements[i].classList.remove('tab-link-active');
+			if (active_elements != null) {
+				// First time, active_elements will be null
+				for (let i = 0; i < active_elements.length; i++) {
+					active_elements[i].classList.remove('tab-link-active');
+				}
 			}
 
 			tapped_element.classList.add('tab-link-active');
@@ -68,6 +67,7 @@
 		{#if $current_page != 'home'}
 			<Toolbar tabbar icons position="bottom">
 				<Link
+					id="tab-1"
 					tabLink="#tab-1"
 					tabLinkActive
 					text="Homepage"
@@ -84,6 +84,7 @@
 					on:click={() => change_tab('/wishlist/', 'tab-2')}
 				/>
 				<Link
+					id="tab-3"
 					tabLink="#tab-3"
 					text="Profilo"
 					iconIos="f7:person"
