@@ -5,16 +5,18 @@
 
 	export let f7router;
 
-	import { Page, Block, Searchbar, Link, Button } from 'framework7-svelte';
+	import { Page, Block, Link } from 'framework7-svelte';
 	import { onMount } from 'svelte';
-	import { getCurrentUser, is_user_logged } from '../lib/firebase_auth.js';
+	import { getCurrentUser } from '../lib/firebase_auth.js';
 	import { current_page } from '../lib/store';
 
-	let user = '';
+	/* Just a mock */
+	let current_user = {
+		displayName: ""
+	};
 	onMount(async () => {
-		if ((await getCurrentUser()) != null) {
-			user = (await getCurrentUser()).displayName;
-		}
+		current_user = await getCurrentUser();
+		console.log(current_user);
 	});
 
 	$current_page = 'homepage';
@@ -28,23 +30,20 @@
 		<div class="circle2" />
 		<div class="freccia" />
 		<div class="left">
-			<h1>Hello {user}</h1>
+			<h1>Hello {current_user.displayName}</h1>
 			<h4 style="margin-top: -6%;">Scegli la pianta che preferisci</h4>
 		</div>
 		<div class="profile_image">
 			<img
 				class="profile_image_photo"
-				src="/foto-profile.png"
+				src={current_user.photoUrl == null ? "/foto-profile.png" : current_user.photoUrl}
 				alt="foto-profile"
 				width="70px"
 				height="70px"
 			/>
 		</div>
-		<!-- searchbar cambiare colore -->
-		<div class="search_bar">
-			<Searchbar />
-		</div>
 	</div>
+
 	<Block>
 		<!-- button -->
 		<div class="button_poisition">
@@ -74,11 +73,6 @@
 			<PiantaCard text="Basilico" img="/homepage-card-basilico.png" />
 		</Block>
 	</Block>
-
-	<!-- {#if import.meta.env.MODE == 'development' && user != '' && user != null} -->
-	<!-- <Button href="/notification_test/" fill>Notification Test</Button>
-	<br /> -->
-	<!-- {/if}	 -->
 </Page>
 
 <style>
