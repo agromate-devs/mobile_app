@@ -15,12 +15,8 @@
 	} from 'framework7-svelte';
 
 	import LoginWithGoogle from '../components/login_with_google.svelte';
-	import { FirebaseAuthentication, } from '@capacitor-firebase/authentication';
-	import { 
-		GoogleAuthProvider,
-		getAuth,
-		signInWithCredential
-	} from 'firebase/auth';
+	import { FirebaseAuthentication } from '@capacitor-firebase/authentication';
+	import { GoogleAuthProvider, getAuth, signInWithCredential } from 'firebase/auth';
 
 	import { getFirestore, setDoc } from 'firebase/firestore';
 	import { doc, getDoc } from 'firebase/firestore';
@@ -77,20 +73,19 @@
 	}
 
 	async function reset_pwd() {
-
 		f7.dialog.prompt('Enter your email', (email) => {
 			f7.dialog.confirm(`Are you sure that your email is ${email}?`);
 		});
 
-		FirebaseAuthentication.sendPasswordResetEmail({email: email});
+		FirebaseAuthentication.sendPasswordResetEmail({ email: email });
 	}
 
-	async function	signInWithGoogle() {
+	async function signInWithGoogle() {
 		const result = await FirebaseAuthentication.signInWithGoogle();
 		const credential = GoogleAuthProvider.credential(result.credential?.idToken);
 		const auth = getAuth();
 		await signInWithCredential(auth, credential);
-	};
+	}
 </script>
 
 <Page>
@@ -135,7 +130,7 @@
 
 	<Block>
 		<div class="display-flex justify-content-center">
-			<LoginWithGoogle on:click={signInWithGoogle}/>
+			<LoginWithGoogle on:click={signInWithGoogle} />
 		</div>
 	</Block>
 
