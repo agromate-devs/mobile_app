@@ -73,18 +73,23 @@
 	}
 
 	async function reset_pwd() {
-		f7.dialog.prompt('Enter your email', (email) => {
-			f7.dialog.confirm(`Are you sure that your email is ${email}?`);
+		f7.dialog.prompt('Inserisci la tua email', (email) => {
+			f7.dialog.confirm(`Sei sicuro che la tua email sia ${email}?`, () => {
+				FirebaseAuthentication.sendPasswordResetEmail({ email: email });
+				f7.dialog.alert('Email di ripristino password inviata alla casella legata al tuo account');
+			});
 		});
-
-		FirebaseAuthentication.sendPasswordResetEmail({ email: email });
 	}
 
 	async function signInWithGoogle() {
 		const result = await FirebaseAuthentication.signInWithGoogle();
 		const credential = GoogleAuthProvider.credential(result.credential?.idToken);
 		const auth = getAuth();
-		await signInWithCredential(auth, credential);
+		const user_result = await signInWithCredential(auth, credential);
+		if (user_result.user != null) {
+			await add_device_to_db(user_result.user.uid);
+			f7router.navigate('/homepage/');
+		}
 	}
 </script>
 
@@ -129,8 +134,12 @@
 	<br />
 
 	<Block>
-		<div class="display-flex justify-content-center">
-			<LoginWithGoogle on:click={signInWithGoogle} />
+		<div
+			class="display-flex justify-content-center"
+			on:click={signInWithGoogle}
+			on:keydown={() => {}}
+		>
+			<LoginWithGoogle />
 		</div>
 	</Block>
 
