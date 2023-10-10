@@ -1,5 +1,10 @@
 /* Your app custom styles here */
 
+.page-content {
+	/* Avoid horizontal scroll */
+	overflow-y: scroll; overflow-x: hidden;
+}
+
 .searchbar-backdrop-in {
 	/* Override default F7 searchbar backdrop (it's ugly for us) */
 	opacity: 0 !important;
