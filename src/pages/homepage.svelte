@@ -12,7 +12,7 @@
 
 	/* Just a mock */
 	let current_user = {
-		displayName: ""
+		displayName: ''
 	};
 	onMount(async () => {
 		current_user = await getCurrentUser();
@@ -36,7 +36,7 @@
 		<div class="profile_image">
 			<img
 				class="profile_image_photo"
-				src={current_user.photoUrl == null ? "/foto-profile.png" : current_user.photoUrl}
+				src={current_user.photoUrl == null ? '/foto-profile.png' : current_user.photoUrl}
 				alt="foto-profile"
 				width="70px"
 				height="70px"

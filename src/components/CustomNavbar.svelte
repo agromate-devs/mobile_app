@@ -2,14 +2,25 @@
 	// We call this component CustomNavbar to avoid conflicts with f7 navbar
 	export let title: string,
 		search_bar: boolean = false,
-		search_bar_placeholder: string | null = null;
+		search_bar_placeholder: string | null = null,
+		search_bar_items = [],
+		object_key: string = '';
 
-	import { Searchbar, f7 } from 'framework7-svelte';
+	import { f7 } from 'framework7-svelte';
+	import CustomSearchBar from './CustomSearchBar.svelte';
+	import { createEventDispatcher } from 'svelte';
 
+	const dispatch = createEventDispatcher();
 	function go_back() {
 		var view = f7.views.current;
 		view.router.back(view.history[view.history.length - 2], {
 			force: true
+		});
+	}
+
+	function found_items(e) {
+		dispatch('found', {
+			items: e.detail.items
 		});
 	}
 </script>
@@ -29,11 +40,12 @@
 	{#if search_bar}
 		<!-- searchbar cambiare colore-->
 		<div class="search_bar">
-			<Searchbar
-				searchContainer=".search-list"
-				searchIn=".item-title"
+			<CustomSearchBar
 				placeholder={search_bar_placeholder}
-			/>
+				items={search_bar_items}
+				{object_key}
+				on:found={found_items}
+			></CustomSearchBar>
 		</div>
 	{/if}
 </div>

@@ -14,8 +14,10 @@
 	import { onMount } from 'svelte';
 	import { capitalize, growth_rate_to_about_days, page_panic, ph_media } from '../lib/helper';
 	import { get_plant_photo } from '../lib/wikipedia';
+	import NotFoundResult from '../components/NotFoundResult.svelte';
 
-	let plants = [];
+	let plants = [],
+		filtered_plants = [];
 
 	onMount(async () => {
 		if (!(await $PLANTS_DB_CONTEXT.is_database_saved())) {
@@ -36,47 +38,89 @@
 		$selected_plant_scientific_name = sci_name;
 		f7router.navigate('/plant/');
 	}
+
+	let empty_filter = false;
+	function found_searched_items(e) {
+		filtered_plants = e.detail.items;
+		if (filtered_plants.length == 0) empty_filter = true;
+		else empty_filter = false;
+	}
 </script>
 
 <Page name="home">
-	<CustomNavbar title={$selected_family} search_bar search_bar_placeholder="Cerca una pianta" />
+	<CustomNavbar
+		title={$selected_family}
+		search_bar
+		search_bar_placeholder="Cerca una pianta"
+		search_bar_items={plants}
+		object_key="scientificNameX"
+		on:found={found_searched_items}
+	/>
 
 	<Block>
-		<!-- <List strongIos outlineIos dividersIos class="searchbar-not-found">
-      <ListItem title="Nothing found" />
-    </List> -->
-
 		<br />
-		<!-- <List class="search-list searchbar-found"> -->
-		{#each plants as plant}
-			{#if plant.commonName != ''}
-				<!-- piantine -->
-				<div
-					on:click={() => select_plant(plant.commonName, plant.scientificNameX)}
-					on:keypress={() => {}}
-				>
-					<PiantaItem
-						temp={plant.temperatureMinimumF == '' ? '?' : plant.temperatureMinimumF}
-						ph={ph_media(plant.pHMinimum, plant.pHMaximum)}
-						days={growth_rate_to_about_days(plant.growthRate)}
-						name={capitalize(plant.commonName)}
-					/>
-				</div>
-			{:else}
-				<div
-					on:click={() => select_plant(plant.scientificNameX, plant.scientificNameX)}
-					on:keypress={() => {}}
-				>
+		{#if empty_filter}
+			<NotFoundResult></NotFoundResult>
+		{:else if filtered_plants.length == 0}
+			{#each plants as plant}
+				{#if plant.commonName != ''}
 					<!-- piantine -->
-					<PiantaItem
-						temp={plant.temperatureMinimumF == '' ? '?' : plant.temperatureMinimumF}
-						ph={ph_media(plant.pHMinimum, plant.pHMaximium)}
-						days={growth_rate_to_about_days(plant.growthRate)}
-						name={plant.scientificNameX}
-					/>
-				</div>
-			{/if}
-		{/each}
-		<!-- </List> -->
+					<div
+						on:click={() => select_plant(plant.commonName, plant.scientificNameX)}
+						on:keypress={() => {}}
+					>
+						<PiantaItem
+							temp={plant.temperatureMinimumF == '' ? '?' : plant.temperatureMinimumF}
+							ph={ph_media(plant.pHMinimum, plant.pHMaximum)}
+							days={growth_rate_to_about_days(plant.growthRate)}
+							name={capitalize(plant.commonName)}
+						/>
+					</div>
+				{:else}
+					<div
+						on:click={() => select_plant(plant.scientificNameX, plant.scientificNameX)}
+						on:keypress={() => {}}
+					>
+						<!-- piantine -->
+						<PiantaItem
+							temp={plant.temperatureMinimumF == '' ? '?' : plant.temperatureMinimumF}
+							ph={ph_media(plant.pHMinimum, plant.pHMaximium)}
+							days={growth_rate_to_about_days(plant.growthRate)}
+							name={plant.scientificNameX}
+						/>
+					</div>
+				{/if}
+			{/each}
+		{:else}
+			{#each filtered_plants as plant}
+				{#if plant.commonName != ''}
+					<!-- piantine -->
+					<div
+						on:click={() => select_plant(plant.commonName, plant.scientificNameX)}
+						on:keypress={() => {}}
+					>
+						<PiantaItem
+							temp={plant.temperatureMinimumF == '' ? '?' : plant.temperatureMinimumF}
+							ph={ph_media(plant.pHMinimum, plant.pHMaximum)}
+							days={growth_rate_to_about_days(plant.growthRate)}
+							name={capitalize(plant.commonName)}
+						/>
+					</div>
+				{:else}
+					<div
+						on:click={() => select_plant(plant.scientificNameX, plant.scientificNameX)}
+						on:keypress={() => {}}
+					>
+						<!-- piantine -->
+						<PiantaItem
+							temp={plant.temperatureMinimumF == '' ? '?' : plant.temperatureMinimumF}
+							ph={ph_media(plant.pHMinimum, plant.pHMaximium)}
+							days={growth_rate_to_about_days(plant.growthRate)}
+							name={plant.scientificNameX}
+						/>
+					</div>
+				{/if}
+			{/each}
+		{/if}
 	</Block>
 </Page>

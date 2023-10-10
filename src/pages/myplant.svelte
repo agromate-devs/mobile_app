@@ -2,11 +2,12 @@
 	export let f7router;
 	export let f7route;
 
-	import { Page, List, Block } from 'framework7-svelte';
+	import { Page, List, Block, ListItem } from 'framework7-svelte';
 	import CustomNavbar from '../components/CustomNavbar.svelte';
 	import PiantaItem from './PiantaItem.svelte';
 	import { onMount } from 'svelte';
 	import { getCurrentUser, get_current_user_jwt } from '../lib/firebase_auth';
+	import NotFoundResult from '../components/NotFoundResult.svelte';
 
 	let piante = [];
 
@@ -45,25 +46,53 @@
 				cache_plants(json);
 			});
 	});
+
+	let filtered_plants = [];
+	let empty_filter = false;
+	function found(e) {
+		filtered_plants = e.detail.items;
+		if (filtered_plants == 0) empty_filter = true;
+		else empty_filter = false;
+	}
 </script>
 
 <Page name="home">
-	<CustomNavbar title="Le mie piante" />
+	<CustomNavbar
+		title="Le mie piante"
+		search_bar={true}
+		search_bar_placeholder="Cerca una pianta"
+		search_bar_items={piante}
+		object_key="plant_name"
+		on:found={found}
+	/>
 
-	<!-- <List dividersIos simpleList style="margin-left: 1em;"> -->
 	<Block>
-		{#each piante as pianta}
-			<div on:click={() => f7router.navigate('/chart/')} on:keydown={() => {}}>
-				<!-- Cambiare in temperatura dal sensore e aggiungere gli altri parametri -->
-				<PiantaItem
-					name={pianta.plant_name}
-					temp={pianta.default_temperature}
-					days={pianta.days}
-					ph={pianta.default_humidity}
-				/>
-			</div>
-		{/each}
+		{#if empty_filter}
+			<NotFoundResult></NotFoundResult>
+		{:else if filtered_plants.length == 0}
+			{#each piante as pianta}
+				<div on:click={() => f7router.navigate('/chart/')} on:keydown={() => {}}>
+					<!-- Cambiare in temperatura dal sensore e aggiungere gli altri parametri -->
+					<PiantaItem
+						name={pianta.plant_name}
+						temp={pianta.default_temperature}
+						days={pianta.days}
+						ph={pianta.default_humidity}
+					/>
+				</div>
+			{/each}
+		{:else}
+			{#each filtered_plants as pianta}
+				<div on:click={() => f7router.navigate('/chart/')} on:keydown={() => {}}>
+					<!-- Cambiare in temperatura dal sensore e aggiungere gli altri parametri -->
+					<PiantaItem
+						name={pianta.plant_name}
+						temp={pianta.default_temperature}
+						days={pianta.days}
+						ph={pianta.default_humidity}
+					/>
+				</div>
+			{/each}
+		{/if}
 	</Block>
-
-	<!-- </List> -->
 </Page>
