@@ -8,21 +8,10 @@
 	import { f7 } from 'framework7-svelte';
 	import { PLANTS_DB_CONTEXT, selected_family } from '../lib/store';
 	import NotFoundResult from '../components/NotFoundResult.svelte';
+	import { import_schema, import_records } from '../lib/db_helper';
 
 	let families = [];
 	let letters = [];
-
-	async function import_records() {
-		const plants = (await (await fetch('usda_light.sql')).text()).split('\n');
-		for (let index = 0; index < plants.length; index++) {
-			await $PLANTS_DB_CONTEXT.query(plants[index]);
-		}
-	}
-
-	async function import_schema() {
-		const schema = await (await fetch('usda_tables.sql')).text();
-		await $PLANTS_DB_CONTEXT.query(schema);
-	}
 
 	onMount(async () => {
 		f7.dialog.preloader(
@@ -32,8 +21,8 @@
 			await $PLANTS_DB_CONTEXT.init_capacitor_sqlite_plugin(); // Init web store and jeep sqlite
 			if (!(await $PLANTS_DB_CONTEXT.is_database_saved())) {
 				await $PLANTS_DB_CONTEXT.init_db(); // Create database on TypeORM
-				await import_schema(); // Import schema
-				await import_records(); // Import plants
+				await import_schema($PLANTS_DB_CONTEXT); // Import schema
+				await import_records($PLANTS_DB_CONTEXT); // Import plants
 				await $PLANTS_DB_CONTEXT.save_database(); // Save DB
 			} else {
 				await $PLANTS_DB_CONTEXT.init_db(); // Create database on TypeORM
