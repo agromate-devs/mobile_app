@@ -1,7 +1,7 @@
 <script>
 	export let f7router;
 	import Agrosmart from '../components/Agrosmart.svelte';
-	import { Page, Block, Navbar, Button } from 'framework7-svelte';
+	import { f7, Page, Block, Navbar, Button, ListItem, List, SwipeoutActions, SwipeoutButton } from 'framework7-svelte';
 	import { onMount } from 'svelte';
 	import { getCurrentUser } from '../lib/firebase_auth.js';
 	import { get_current_user_jwt } from '../lib/firebase_auth.js';
@@ -26,6 +26,21 @@
 
 		console.log(info);
 	});
+
+	async function delete_agrosmart(device_id) {
+		const jwt = await get_current_user_jwt();
+		const res = await fetch('https://b8kc0x92yj.execute-api.eu-central-1.amazonaws.com&device_id='.concat(device_id), {
+			method: 'DELETE',
+			headers: new Headers({
+				authorization: jwt.token,
+				'content-type': 'application/x-www-form-urlencoded'
+			})
+		});
+
+		if(res.status != 200 && (await res.json()).error){
+			f7.dialog.alert("Errore durante l'eliminazione dell'agrosmart");
+		}
+	}
 </script>
 
 <Page name="home">
@@ -49,12 +64,19 @@
 	</div>
 	<Block>
 		{#each info as net, i}
+		<ListItem swipeout on:swipeoutDeleted={() => delete_agrosmart(net.device_id)}>
+			<SwipeoutActions right>
+				<SwipeoutButton delete confirmText="Sei sicuro di voler rimuovere questo agrosmart?">
+					Cancella
+				</SwipeoutButton>
+			</SwipeoutActions>
 			<Agrosmart
 				device_name="Agrosmart v1"
 				signal_level={86}
 				sw_version="1.2.0"
 				update_available={false}
 			></Agrosmart>
+		</ListItem>
 		{/each}
 	</Block>
 
