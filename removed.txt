@@ -1,0 +1,4 @@
+    "capacitor-plugin-esptouch": "^0.0.1",
+    "capacitorjs-plugin-wifi": "^1.0.7",
+    "svelte-chartjs": "^3.1.5",
+    "svelte-chart": "^1.0.0",

@@ -1,0 +1,97 @@
+<script lang="ts">
+
+	import { Page, List, Block, ListItem } from 'framework7-svelte';
+	import CustomNavbar from '../components/CustomNavbar.svelte';
+	import PiantaItem from './PiantaItem.svelte';
+	import { onMount } from 'svelte';
+	import { getCurrentUser, get_current_user_jwt } from '../lib/firebase_auth';
+	import NotFoundResult from '../components/NotFoundResult.svelte';
+	let { f7router, f7route } = $props();
+
+	let piante = $state([]);
+
+	function cache_plants(plants) {
+		// Cache plants in localStorage, risparmiamo sul costo delle query
+		sessionStorage.setItem('myplants', JSON.stringify(plants));
+	}
+
+	function get_plants_from_cache() {
+		const cached_plants = sessionStorage.getItem('myplants');
+		return cached_plants != null ? JSON.parse(cached_plants) : [];
+	}
+
+	onMount(async () => {
+		const raw_plants_from_cache = get_plants_from_cache();
+
+		if (raw_plants_from_cache.length > 0) {
+			piante = raw_plants_from_cache;
+			return; // Stop here, don't do another useless request to AWS
+		}
+
+		const jwt = await get_current_user_jwt();
+		const user = await getCurrentUser();
+		fetch(
+			'https://dlc52l1dnc.execute-api.eu-central-1.amazonaws.com/plant_info_api?sensor_id=NULL',
+			{
+				headers: new Headers({
+					authorization: jwt.token,
+					'content-type': 'application/x-www-form-urlencoded'
+				})
+			}
+		)
+			.then((response) => response.json()) // converti a json
+			.then((json) => {
+				piante = json;
+				cache_plants(json);
+			});
+	});
+
+	let filtered_plants = $state([]);
+	let empty_filter = $state(false);
+	function found(e) {
+		filtered_plants = e.detail.items;
+		if (filtered_plants == 0) empty_filter = true;
+		else empty_filter = false;
+	}
+</script>
+
+<Page name="home">
+	<CustomNavbar
+		title="Le mie piante"
+		search_bar={true}
+		search_bar_placeholder="Cerca una pianta"
+		search_bar_items={piante}
+		object_key="plant_name"
+		on:found={found}
+	/>
+
+	<Block>
+		{#if empty_filter}
+			<NotFoundResult></NotFoundResult>
+		{:else if filtered_plants.length == 0}
+			{#each piante as pianta}
+				<div onclick={() => f7router.navigate('/chart/')} onkeydown={() => {}}>
+					<!-- Cambiare in temperatura dal sensore e aggiungere gli altri parametri -->
+					<PiantaItem
+						name={pianta.plant_name}
+						temp={pianta.default_temperature}
+						days={pianta.days}
+						ph={pianta.default_humidity}
+					/>
+				</div>
+			{/each}
+		{:else}
+			{#each filtered_plants as pianta}
+				<div onclick={() => f7router.navigate('/chart/')} onkeydown={() => {}}>
+					<!-- Cambiare in temperatura dal sensore e aggiungere gli altri parametri -->
+					<PiantaItem
+						name={pianta.plant_name}
+						temp={pianta.default_temperature}
+						days={pianta.days}
+						ph={pianta.default_humidity}
+					/>
+				</div>
+			{/each}
+		{/if}
+	</Block>
+</Page>

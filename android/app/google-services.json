@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "201155304709",
+    "project_id": "travelmates-382922",
+    "storage_bucket": "travelmates-382922.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:201155304709:android:a0c534fd1481bafef56b6c",
+        "android_client_info": {
+          "package_name": "io.agromate.agromate"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "201155304709-4qsvhdms879luq2vo9tvfoc8i749bre4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDH9EKX6LbqGDonzTit7wgUz3oj09o2jvA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "201155304709-4qsvhdms879luq2vo9tvfoc8i749bre4.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
